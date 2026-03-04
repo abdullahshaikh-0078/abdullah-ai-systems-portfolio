@@ -1,0 +1,37 @@
+/* ===== DESIGN TOKENS ===== */
+
+:root {
+
+    /* Colors */
+    --as-color-bg-primary: #0b0f14;
+    --as-color-bg-secondary: #11161d;
+    --as-color-accent: #2f81f7;
+    --as-color-accent-secondary: #8b5cf6;
+    --as-color-text-primary: #e6edf3;
+    --as-color-text-secondary: #9aa4b2;
+    --as-color-border: #1f2933;
+
+    /* Typography */
+    --as-font-primary: 'Inter', sans-serif;
+    --as-font-heading: 'Inter', sans-serif;
+
+    /* Font Sizes */
+    --as-text-xl: 3rem;
+    --as-text-lg: 2rem;
+    --as-text-md: 1.25rem;
+    --as-text-base: 1rem;
+    --as-text-sm: 0.875rem;
+
+    /* Spacing Scale */
+    --as-space-xs: 0.5rem;
+    --as-space-sm: 1rem;
+    --as-space-md: 2rem;
+    --as-space-lg: 4rem;
+    --as-space-xl: 6rem;
+
+    /* Border Radius */
+    --as-radius-sm: 6px;
+    --as-radius-md: 12px;
+    --as-radius-lg: 20px;
+
+}
