@@ -1,0 +1,39 @@
+/* ===== GLOBAL UTILITIES ===== */
+
+.as-section {
+    padding: var(--as-space-xl) 0;
+}
+
+.as-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.as-btn-primary {
+    background-color: var(--as-color-accent);
+    color: #ffffff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--as-radius-md);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.as-btn-primary:hover {
+    opacity: 0.9;
+}
+
+.as-btn-secondary {
+    background-color: transparent;
+    color: var(--as-color-text-primary);
+    border: 1px solid var(--as-color-border);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--as-radius-md);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.as-btn-secondary:hover {
+    background-color: var(--as-color-bg-secondary);
+}

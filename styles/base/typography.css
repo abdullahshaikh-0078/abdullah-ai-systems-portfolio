@@ -1,0 +1,28 @@
+/* ===== TYPOGRAPHY ===== */
+
+body {
+    font-family: var(--as-font-primary);
+    background-color: var(--as-color-bg-primary);
+    color: var(--as-color-text-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--as-font-heading);
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.as-hero-title {
+    font-size: var(--as-text-xl);
+    margin-bottom: var(--as-space-sm);
+}
+
+.as-section-title {
+    font-size: var(--as-text-lg);
+    margin-bottom: var(--as-space-md);
+}
+
+p {
+    color: var(--as-color-text-secondary);
+    font-size: var(--as-text-base);
+}
