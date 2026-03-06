@@ -1,0 +1,18 @@
+/* ===== HERO SECTION ===== */
+
+.as-hero {
+    display: flex;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.as-hero-subtitle {
+    max-width: 600px;
+    margin-bottom: var(--as-space-md);
+}
+
+.as-hero-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: var(--as-space-sm);
+}
