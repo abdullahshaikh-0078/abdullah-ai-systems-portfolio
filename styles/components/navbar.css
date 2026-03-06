@@ -1,0 +1,137 @@
+/* ===== NAVBAR ===== */
+
+.as-navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    background-color: var(--as-color-bg-primary);
+    border-bottom: 1px solid var(--as-color-border);
+    z-index: 1000;
+}
+
+.as-navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: 1200px;
+    margin: 0 auto;
+
+    padding: 1rem 0;
+}
+
+.as-logo {
+    font-weight: 600;
+    font-size: var(--as-text-md);
+}
+
+.as-nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.as-nav-links a {
+    text-decoration: none;
+    color: var(--as-color-text-secondary);
+    font-size: var(--as-text-sm);
+    transition: color 0.2s ease;
+}
+
+.as-nav-links a:hover {
+    color: var(--as-color-text-primary);
+}
+
+.as-theme-toggle {
+
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    font-size: 1.2rem;
+
+    color: var(--as-color-text-secondary);
+
+    transition: color 0.2s ease;
+
+}
+
+.as-theme-toggle:hover {
+
+    color: var(--as-color-text-primary);
+
+}
+/* ===== THEME SWITCH ===== */
+
+/* Toggle container */
+
+.as-theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 28px;
+}
+
+.as-theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Slider background */
+
+.as-theme-slider {
+    position: absolute;
+    cursor: pointer;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: var(--as-color-border);
+    border-radius: 34px;
+
+    transition: 0.3s ease;
+}
+
+/* Toggle knob */
+
+.as-theme-slider::before {
+
+    content: "🌙";
+
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+
+    height: 22px;
+    width: 22px;
+
+    left: 3px;
+    bottom: 3px;
+
+    background-color: white;
+
+    border-radius: 50%;
+
+    transition: 0.3s ease;
+}
+
+/* When toggled (light mode) */
+
+input:checked + .as-theme-slider {
+    background-color: var(--as-color-accent);
+}
+
+input:checked + .as-theme-slider::before {
+
+    content: "☀️";
+
+    transform: translateX(26px);
+
+}
