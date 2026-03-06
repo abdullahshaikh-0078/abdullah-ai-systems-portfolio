@@ -1,0 +1,5 @@
+/* ===== SECTION SPACING ===== */
+
+.as-section {
+    padding: var(--as-space-xl) 0;
+}
