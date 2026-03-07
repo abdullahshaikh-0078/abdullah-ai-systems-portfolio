@@ -1,0 +1,57 @@
+/* ===== SYSTEMS GRID ===== */
+
+.as-systems-grid {
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+
+    gap: 2rem;
+    margin-top: var(--as-space-md);
+
+}
+
+
+/* ===== SYSTEM CARD ===== */
+
+.as-system-card {
+
+    background-color: var(--as-color-bg-secondary);
+    border: 1px solid var(--as-color-border);
+
+    padding: 2rem;
+
+    border-radius: var(--as-radius-md);
+
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+/* hover effect */
+
+.as-system-card:hover {
+
+    transform: translateY(-6px);
+
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+
+}
+
+
+/* title */
+
+.as-system-title {
+
+    font-size: var(--as-text-md);
+    margin-bottom: 0.5rem;
+
+}
+
+
+/* description */
+
+.as-system-description {
+
+    font-size: var(--as-text-sm);
+    color: var(--as-color-text-secondary);
+
+}
