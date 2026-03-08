@@ -1,0 +1,18 @@
+/* ===== SCROLL REVEAL ===== */
+
+.as-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* visible state */
+.as-reveal.as-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* optional stagger helper for cards */
+.as-stagger > * {
+    transition-delay: 0.08s;
+}
