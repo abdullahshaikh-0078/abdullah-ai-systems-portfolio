@@ -8,10 +8,12 @@
     --as-color-text-primary: #e6edf3;
     --as-color-text-secondary: #9aa4b2;
 
-    --as-color-accent: #2f81f7;
-    --as-color-accent-secondary: #8b5cf6;
-
     --as-color-border: #1f2933;
+
+    /* stronger accents for dark UI */
+
+    --as-color-accent: #4cc9f0;
+    --as-color-accent-secondary: #9b5cf6;
 
     /* Typography */
 
@@ -41,11 +43,15 @@
 body.as-light-theme {
 
     --as-color-bg-primary: #ffffff;
-    --as-color-bg-secondary: #f6f8fa;
+    --as-color-bg-secondary: #f7f9fc;
 
     --as-color-text-primary: #0f172a;
     --as-color-text-secondary: #475569;
 
     --as-color-border: #e5e7eb;
+
+    /* accents */
+    --as-color-accent: #7dd9eb;
+    --as-color-accent-secondary: #a889f2;
 
 }
