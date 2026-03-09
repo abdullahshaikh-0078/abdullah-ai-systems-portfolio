@@ -1,0 +1,33 @@
+.as-system-detail-card {
+
+    background: var(--as-color-bg-secondary);
+
+    border: 1px solid var(--as-color-border);
+
+    padding: 2rem;
+
+    border-radius: var(--as-radius-md);
+
+    max-width: 800px;
+
+}
+
+.as-system-detail-card h3 {
+
+    margin-bottom: 1rem;
+
+}
+
+.as-system-detail-card ul {
+
+    margin-top: 1rem;
+
+    padding-left: 1rem;
+
+}
+
+.as-system-detail-card li {
+
+    margin-bottom: 0.4rem;
+
+}

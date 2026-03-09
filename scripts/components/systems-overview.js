@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const systems = [
-
         {
             icon: "🤖",
             title: "Recommendation System",
@@ -43,39 +42,57 @@ document.addEventListener("DOMContentLoaded", () => {
             description: "Scalable backend architecture with caching, load balancing, and concurrency control.",
             tags: ["Distributed", "Caching", "Scaling"]
         }
-
     ];
-
 
     systems.forEach(system => {
 
         const card = document.createElement("div");
-
         card.className = "as-system-card";
-
 
         const tagsHTML = system.tags
             .map(tag => `<span class="as-system-tag">${tag}</span>`)
             .join("");
 
-
         card.innerHTML = `
             <div class="as-system-icon">${system.icon}</div>
-
             <h3 class="as-system-title">${system.title}</h3>
-
-            <p class="as-system-description">
-                ${system.description}
-            </p>
-
+            <p class="as-system-description">${system.description}</p>
             <div class="as-system-tags">
                 ${tagsHTML}
             </div>
         `;
 
+        card.addEventListener("click", () => {
+            showSystemDetail(system);
+        });
 
         grid.appendChild(card);
-
     });
+
+
+    function showSystemDetail(system) {
+
+        const container = document.getElementById("as-system-content");
+
+        container.innerHTML = `
+            <div class="as-system-detail-card">
+
+                <h3>${system.icon} ${system.title}</h3>
+
+                <p>${system.description}</p>
+
+                <h4>Key Technologies</h4>
+
+                <ul>
+                    ${system.tags.map(tag => `<li>${tag}</li>`).join("")}
+                </ul>
+
+            </div>
+        `;
+
+        document
+            .getElementById("as-system-detail")
+            .scrollIntoView({ behavior: "smooth" });
+    }
 
 });

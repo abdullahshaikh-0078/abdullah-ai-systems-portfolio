@@ -16,6 +16,8 @@
 
 .as-system-card {
 
+    position: relative;
+
     background: var(--as-color-bg-secondary);
 
     border: 1px solid var(--as-color-border);
@@ -36,18 +38,49 @@
 }
 
 
+/* Gradient border effect */
+
+.as-system-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -1px;
+
+    border-radius: inherit;
+
+    background: linear-gradient(
+        120deg,
+        var(--as-color-accent),
+        var(--as-color-accent-secondary)
+    );
+
+    opacity: 0;
+
+    transition: opacity 0.3s ease;
+
+    z-index: -1;
+
+}
+
+
 /* Hover effect */
 
 .as-system-card:hover {
 
     transform: translateY(-8px);
 
-    border-color: var(--as-color-accent);
-
-    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    box-shadow: 0 14px 36px rgba(0,0,0,0.35);
 
 }
 
+
+.as-system-card:hover::before {
+
+    opacity: 1;
+
+}
 
 /* System icon */
 
@@ -95,18 +128,27 @@
 }
 
 
-/* Individual tag */
-
 .as-system-tag {
 
-    font-size: 0.7rem;
+    font-size: 0.72rem;
 
-    padding: 4px 8px;
+    padding: 4px 10px;
 
-    border-radius: 6px;
+    border-radius: 20px;
 
     background: var(--as-color-border);
 
     color: var(--as-color-text-secondary);
+
+    transition: background 0.2s ease;
+
+}
+
+
+.as-system-card:hover .as-system-tag {
+
+    background: rgba(47,129,247,0.15);
+
+    color: var(--as-color-text-primary);
 
 }
