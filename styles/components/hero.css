@@ -1,18 +1,55 @@
-/* ===== HERO SECTION ===== */
+/* ===== HERO LAYOUT ===== */
 
 .as-hero {
+
+    position: relative;
+
     display: flex;
     align-items: center;
-    min-height: 80vh;
+
+    min-height: 85vh;
+
+    overflow: hidden;
+
+}
+
+/* canvas background */
+
+#as-hero-canvas {
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 0;
+
+}
+
+/* content above canvas */
+
+.as-hero-content {
+
+    position: relative;
+
+    z-index: 1;
+
 }
 
 .as-hero-subtitle {
+
     max-width: 600px;
+
     margin-bottom: var(--as-space-md);
+
 }
 
 .as-hero-actions {
+
     display: flex;
     gap: 1rem;
-    margin-top: var(--as-space-sm);
+
 }
