@@ -34,7 +34,7 @@
 .as-hero-content {
 
     position: relative;
-
+    max-width: 700px;
     z-index: 1;
 
 }
