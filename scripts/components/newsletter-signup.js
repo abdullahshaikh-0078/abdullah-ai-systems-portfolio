@@ -342,15 +342,9 @@ export class NewsletterSignupController {
         };
 
         try {
-            let res = null;
-            try {
-                res = await aiNewsApi.subscribeToAINews(payload);
-            } catch (apiErr) {
-                // If backend offline or static portfolio environment, persist locally
-                console.warn('API call encountered an issue, persisting locally:', apiErr);
-            }
+            const res = await aiNewsApi.subscribeToAINews(payload);
 
-            // Always update local subscriber records
+            // Update local subscriber records on successful subscription
             try {
                 const subs = JSON.parse(localStorage.getItem('as_subscribers') || '[]');
                 if (!subs.includes(email)) subs.push(email);
@@ -371,9 +365,14 @@ export class NewsletterSignupController {
             if (this.emailInput) this.emailInput.value = '';
         } catch (err) {
             console.error('Subscription error:', err);
-            const userMsg = err.message && !err.message.includes('HTTP')
-                ? err.message
-                : "We couldn't complete your subscription right now. Please try again.";
+            let userMsg = "We couldn't complete your subscription right now. Please try again.";
+            if (err && err.message) {
+                if (err.status === 0 || err.code === 'NETWORK_ERROR') {
+                    userMsg = "Unable to connect to the newsletter server. Please try again in a few moments.";
+                } else {
+                    userMsg = err.message;
+                }
+            }
             this.showFeedback(userMsg, 'error');
         } finally {
             this.isSubmitting = false;
@@ -447,7 +446,16 @@ export class NewsletterSignupController {
         };
 
         try {
-            // Save to localStorage
+            // Submit to backend
+            await aiNewsApi.subscribeToAINews({
+                email: email,
+                name: name,
+                frequency: frequency,
+                preferred_channel: 'EMAIL',
+                topics: topics
+            });
+
+            // Save to localStorage upon successful backend confirmation
             try {
                 localStorage.setItem('as_newsletter_preferences', JSON.stringify(payload));
                 localStorage.setItem('as_newsletter_email', email);
@@ -461,19 +469,6 @@ export class NewsletterSignupController {
                 this.emailInput.value = email;
             }
 
-            // API submission (non-blocking if backend is offline)
-            try {
-                await aiNewsApi.subscribeToAINews({
-                    email: email,
-                    name: name,
-                    frequency: frequency,
-                    preferred_channel: 'EMAIL',
-                    topics: topics
-                });
-            } catch (apiErr) {
-                console.warn('API sync deferred, saved to local state:', apiErr);
-            }
-
             // Subtle success feedback
             this.showModalFeedback('Preferences saved.', 'success');
 
@@ -483,10 +478,15 @@ export class NewsletterSignupController {
             }, 1200);
         } catch (err) {
             console.error('Customization save error:', err);
-            this.showModalFeedback(
-                "We couldn't save your preferences right now. Please try again.",
-                'error'
-            );
+            let userMsg = "We couldn't save your preferences right now. Please try again.";
+            if (err && err.message) {
+                if (err.status === 0 || err.code === 'NETWORK_ERROR') {
+                    userMsg = "Unable to connect to server. Please check your connection and try again.";
+                } else {
+                    userMsg = err.message;
+                }
+            }
+            this.showModalFeedback(userMsg, 'error');
         } finally {
             this.isSubmitting = false;
             if (this.modalSaveBtn) this.modalSaveBtn.disabled = false;

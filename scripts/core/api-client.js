@@ -1,12 +1,26 @@
 /**
  * AI News Platform - API Client
- * Production client connecting to FastAPI backend at http://127.0.0.1:8000/api/v1
+ * Production client connecting to live Render backend or local FastAPI development server.
  */
 
-export const API_BASE_URL = window.__AI_NEWS_API_URL__ || (typeof window !== "undefined" && (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") ? "http://127.0.0.1:8000/api/v1" : "/api/v1");
+import {
+  PROD_API_BASE_URL,
+  LOCAL_API_BASE_URL,
+  resolveApiBaseUrl,
+  buildApiUrl
+} from "./config.js";
+
+export {
+  PROD_API_BASE_URL,
+  LOCAL_API_BASE_URL,
+  resolveApiBaseUrl,
+  buildApiUrl
+};
+
+export const API_BASE_URL = resolveApiBaseUrl();
 
 export class ApiError extends Error {
-  constructor(message, status, code, details = []) {
+  constructor(message, status = 0, code = "UNKNOWN_ERROR", details = []) {
     super(message);
     this.name = "ApiError";
     this.status = status;
@@ -15,10 +29,18 @@ export class ApiError extends Error {
   }
 }
 
+/**
+ * Execute HTTP JSON requests with robust error extraction and path normalization.
+ * @param {string} endpoint
+ * @param {RequestInit} [options={}]
+ * @returns {Promise<any>}
+ */
 async function fetchJson(endpoint, options = {}) {
-  const url = API_BASE_URL + endpoint;
+  const url = buildApiUrl(endpoint);
+
+  let res;
   try {
-    const res = await fetch(url, {
+    res = await fetch(url, {
       ...options,
       headers: {
         "Accept": "application/json",
@@ -26,37 +48,83 @@ async function fetchJson(endpoint, options = {}) {
         ...(options.headers || {})
       }
     });
-
-    if (!res.ok) {
-      let errorData = {};
-      try {
-        errorData = await res.json();
-      } catch (e) {
-        // non-JSON response
-      }
-      const err = errorData.error || {};
-      throw new ApiError(
-        err.message || ("HTTP " + res.status + ": " + res.statusText),
-        res.status,
-        err.code || "REQUEST_FAILED",
-        err.details || []
-      );
-    }
-
-    return await res.json();
-  } catch (err) {
-    if (err instanceof ApiError) throw err;
+  } catch (netErr) {
     throw new ApiError(
-      "Network connection failed: " + err.message + ". Ensure backend is running at " + API_BASE_URL,
+      `Network connection failed: ${netErr.message || "Unable to reach server"}. Ensure backend is running at ${resolveApiBaseUrl()}`,
       0,
       "NETWORK_ERROR"
+    );
+  }
+
+  // Handle 204 No Content
+  if (res.status === 204) {
+    return { status: "success" };
+  }
+
+  // Handle HTTP error responses
+  if (!res.ok) {
+    let errorData = null;
+    let rawText = "";
+
+    try {
+      rawText = await res.text();
+      if (rawText) {
+        errorData = JSON.parse(rawText);
+      }
+    } catch (_) {
+      // Non-JSON response (e.g. HTML error page or plain text)
+    }
+
+    let message = "";
+    let details = [];
+
+    if (errorData) {
+      if (typeof errorData.detail === "string") {
+        message = errorData.detail;
+      } else if (Array.isArray(errorData.detail)) {
+        // FastAPI validation errors
+        details = errorData.detail;
+        message = errorData.detail
+          .map((d) => (d.msg ? (d.loc && d.loc.length > 1 ? `${d.loc.slice(1).join(".")}: ${d.msg}` : d.msg) : JSON.stringify(d)))
+          .join("; ");
+      } else if (errorData.error && typeof errorData.error.message === "string") {
+        message = errorData.error.message;
+        details = errorData.error.details || [];
+      } else if (typeof errorData.message === "string") {
+        message = errorData.message;
+      }
+    }
+
+    if (!message) {
+      if (rawText && rawText.length < 200 && !rawText.trim().startsWith("<")) {
+        message = rawText.trim();
+      } else {
+        message = `HTTP ${res.status}: ${res.statusText || "Request failed"}`;
+      }
+    }
+
+    const code =
+      (errorData && (errorData.code || (errorData.error && errorData.error.code))) ||
+      (res.status === 422 ? "VALIDATION_ERROR" : `HTTP_${res.status}`);
+
+    throw new ApiError(message, res.status, code, details);
+  }
+
+  // Handle successful response body
+  try {
+    return await res.json();
+  } catch (parseErr) {
+    throw new ApiError(
+      `Invalid response from server: expected JSON, but received non-JSON payload (${parseErr.message})`,
+      res.status,
+      "INVALID_RESPONSE"
     );
   }
 }
 
 export const aiNewsApi = {
   /**
-   * Get real-time system metrics directly from PostgreSQL
+   * Get real-time system metrics directly from backend
    */
   async getOverview() {
     return fetchJson("/overview");
@@ -76,58 +144,63 @@ export const aiNewsApi = {
    * Get story details with member items
    */
   async getStoryDetails(storyId) {
-    return fetchJson("/stories/" + storyId);
+    return fetchJson("/stories/" + encodeURIComponent(storyId));
   },
 
   /**
    * Get transparent 6-signal ranking explanation for a story
    */
   async getStoryRanking(storyId) {
-    return fetchJson("/stories/" + storyId + "/ranking");
+    return fetchJson("/stories/" + encodeURIComponent(storyId) + "/ranking");
   },
 
   /**
-   * Get paginated content items directly from PostgreSQL
+   * Get paginated content items directly from backend
    */
   async getContentItems({ page = 1, pageSize = 20, contentType = null } = {}) {
     const params = new URLSearchParams({ page: String(page), page_size: String(pageSize) });
     if (contentType) params.append("content_type", contentType);
     return fetchJson("/content?" + params.toString());
   },
-/**
-   * Phase 17: Subscribe to AI News Daily Digest
+
+  /**
+   * Subscribe to AI News Daily Digest
    */
   async subscribeToAINews(data) {
-    return fetchJson('/newsletter/subscribe', {
-      method: 'POST',
+    return fetchJson("/newsletter/subscribe", {
+      method: "POST",
       body: JSON.stringify(data)
     });
   },
 
   /**
-   * Phase 17: Update subscriber preferences
+   * Update subscriber preferences
    */
   async updateAINewsPreferences(data) {
-    return fetchJson('/newsletter/preferences', {
-      method: 'PUT',
+    return fetchJson("/newsletter/preferences", {
+      method: "PUT",
       body: JSON.stringify(data)
     });
   },
 
   /**
-   * Phase 17: Unsubscribe from AI News
+   * Unsubscribe from AI News
    */
   async unsubscribeFromAINews(data) {
-    return fetchJson('/newsletter/unsubscribe', {
-      method: 'POST',
+    return fetchJson("/newsletter/unsubscribe", {
+      method: "POST",
       body: JSON.stringify(data)
     });
   },
 
   /**
-   * Phase 17: Get latest digest issue
+   * Get latest digest issue
    */
   async getLatestDigest() {
-    return fetchJson('/digests/latest');
+    return fetchJson("/digests/latest");
   }
 };
+
+if (typeof window !== "undefined") {
+  window.aiNewsApi = aiNewsApi;
+}

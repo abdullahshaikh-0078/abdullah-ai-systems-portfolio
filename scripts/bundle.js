@@ -608,7 +608,9 @@
             });
         }
 
-        if (form && !form.dataset.bound) {
+        const hasModuleMain = typeof document !== 'undefined' && !!document.querySelector('script[type="module"][src*="main.js"]');
+
+        if (!hasModuleMain && form && !form.dataset.bound) {
             form.dataset.bound = 'true';
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -629,17 +631,28 @@
                 if (btnSpinner) btnSpinner.style.display = 'inline-block';
 
                 try {
-                    const apiUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-                        ? 'http://127.0.0.1:8000/api/v1/newsletter/subscribe'
-                        : '/api/v1/newsletter/subscribe';
-
-                    try {
-                        await fetch(apiUrl, {
+                    if (window.aiNewsApi && typeof window.aiNewsApi.subscribeToAINews === 'function') {
+                        const res = await window.aiNewsApi.subscribeToAINews({ email, frequency: 'DAILY', preferred_channel: 'EMAIL' });
+                        showFeedback((res && res.message) || "You're subscribed! The Daily AI Digest will be delivered to your inbox.", false);
+                    } else {
+                        const apiUrl = (typeof window.buildApiUrl === 'function')
+                            ? window.buildApiUrl('/newsletter/subscribe')
+                            : ((window.__AI_NEWS_API_URL__ || '') + '/newsletter/subscribe');
+                        const res = await fetch(apiUrl, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                             body: JSON.stringify({ email: email, frequency: 'DAILY', preferred_channel: 'EMAIL' })
                         });
-                    } catch (netErr) { }
+                        if (!res.ok) {
+                            let msg = 'Subscription request failed (' + res.status + ')';
+                            try {
+                                const errJson = await res.json();
+                                if (errJson.detail) msg = typeof errJson.detail === 'string' ? errJson.detail : JSON.stringify(errJson.detail);
+                            } catch (_) {}
+                            throw new Error(msg);
+                        }
+                        showFeedback("You're subscribed! The Daily AI Digest will be delivered to your inbox.", false);
+                    }
 
                     try {
                         const subs = JSON.parse(localStorage.getItem('as_subscribers') || '[]');
@@ -648,10 +661,9 @@
                         localStorage.setItem('as_newsletter_email', email);
                     } catch (e) { }
 
-                    showFeedback("You're subscribed! The Daily AI Digest will be delivered to your inbox.", false);
                     if (emailInput) emailInput.value = '';
                 } catch (err) {
-                    showFeedback("You're subscribed to the Daily AI Digest!", false);
+                    showFeedback(err.message || "We couldn't complete your subscription right now. Please try again.", true);
                 } finally {
                     if (submitBtn) submitBtn.disabled = false;
                     if (btnText) btnText.textContent = 'Subscribe';
@@ -660,7 +672,7 @@
             });
         }
 
-        if (modalForm && !modalForm.dataset.bound) {
+        if (!hasModuleMain && modalForm && !modalForm.dataset.bound) {
             modalForm.dataset.bound = 'true';
             modalForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
@@ -716,30 +728,41 @@
                 };
 
                 try {
-                    localStorage.setItem('as_newsletter_preferences', JSON.stringify(payload));
-                    localStorage.setItem('as_newsletter_email', email);
-                    const subs = JSON.parse(localStorage.getItem('as_subscribers') || '[]');
-                    if (!subs.includes(email)) subs.push(email);
-                    localStorage.setItem('as_subscribers', JSON.stringify(subs));
-
-                    if (emailInput) emailInput.value = email;
-
-                    const apiUrl = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
-                        ? 'http://127.0.0.1:8000/api/v1/newsletter/subscribe'
-                        : '/api/v1/newsletter/subscribe';
-
-                    try {
-                        await fetch(apiUrl, {
+                    if (window.aiNewsApi && typeof window.aiNewsApi.subscribeToAINews === 'function') {
+                        await window.aiNewsApi.subscribeToAINews({ email, name, frequency, preferred_channel: 'EMAIL', topics });
+                    } else {
+                        const apiUrl = (typeof window.buildApiUrl === 'function')
+                            ? window.buildApiUrl('/newsletter/subscribe')
+                            : ((window.__AI_NEWS_API_URL__ || '') + '/newsletter/subscribe');
+                        const res = await fetch(apiUrl, {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                             body: JSON.stringify({ email, name, frequency, preferred_channel: 'EMAIL', topics })
                         });
-                    } catch (netErr) { }
+                        if (!res.ok) {
+                            let msg = 'Could not save preferences (' + res.status + ')';
+                            try {
+                                const errJson = await res.json();
+                                if (errJson.detail) msg = typeof errJson.detail === 'string' ? errJson.detail : JSON.stringify(errJson.detail);
+                            } catch (_) {}
+                            throw new Error(msg);
+                        }
+                    }
+
+                    try {
+                        localStorage.setItem('as_newsletter_preferences', JSON.stringify(payload));
+                        localStorage.setItem('as_newsletter_email', email);
+                        const subs = JSON.parse(localStorage.getItem('as_subscribers') || '[]');
+                        if (!subs.includes(email)) subs.push(email);
+                        localStorage.setItem('as_subscribers', JSON.stringify(subs));
+                    } catch (lsErr) { }
+
+                    if (emailInput) emailInput.value = email;
 
                     showModalFeedback('Preferences saved.', false);
                     setTimeout(closeModal, 1200);
                 } catch (e) {
-                    showModalFeedback("We couldn't save your preferences right now. Please try again.", true);
+                    showModalFeedback(e.message || "We couldn't save your preferences right now. Please try again.", true);
                 } finally {
                     if (modalSaveBtn) modalSaveBtn.disabled = false;
                     if (saveText) saveText.textContent = 'Save Preferences';

@@ -84,8 +84,22 @@ def test_css_braces():
         print(f"  [FAIL] Mismatched CSS braces: {open_b} open vs {close_b} close")
         return False
 
+def test_api_client():
+    print("[5/6] Testing API client configuration & contracts...")
+    try:
+        res = subprocess.run(["node", "--test", "scripts/test_api_client.js"], capture_output=True, text=True)
+        if res.returncode == 0:
+            print("  [OK] All 9 API client & URL normalization tests passed")
+            return True
+        else:
+            print(f"  [FAIL] API tests failed:\n{res.stderr or res.stdout}")
+            return False
+    except Exception as e:
+        print(f"  [FAIL] Could not run Node.js tests: {e}")
+        return False
+
 def test_visual_captures():
-    print("[5/5] Generating visual verification captures...")
+    print("[6/6] Generating visual verification captures...")
     if not os.path.exists(EDGE_EXE):
         print("  - Edge executable not found, skipping screenshots")
         return True
@@ -123,8 +137,10 @@ if __name__ == "__main__":
     t2 = test_html_syntax()
     t3 = test_anchor_links()
     t4 = test_css_braces()
-    t5 = test_visual_captures()
+    t5 = test_api_client()
+    t6 = test_visual_captures()
     print("=" * 60)
-    all_passed = t1 and t2 and t3 and t4 and t5
+    all_passed = t1 and t2 and t3 and t4 and t5 and t6
     print(f"FINAL RESULT: {'ALL CHECKS PASSED [OK]' if all_passed else 'SOME CHECKS FAILED [FAIL]'}")
     print("=" * 60)
+

@@ -132,11 +132,15 @@ class AiNewsProjectController {
             this.renderStories();
         } catch (err) {
             console.error('Failed to fetch curated stories:', err);
+            const isLocal = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+            const subtext = isLocal
+                ? 'Start the local backend on port 8000: <code>uvicorn app.main:app --port 8000</code>'
+                : 'Could not connect to live backend. If the Render service is waking from cold sleep, please wait 30 seconds and retry.';
             grid.innerHTML = `
                 <div style="grid-column: 1 / -1; padding: 2.5rem; text-align: center; background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); border-radius: 12px;">
-                    <h4 style="color: #f87171; margin-bottom: 0.5rem;">FastAPI Backend Not Reachable</h4>
+                    <h4 style="color: #f87171; margin-bottom: 0.5rem;">AI News Backend Not Reachable</h4>
                     <p style="color: var(--as-color-text-secondary); font-size: 0.9rem; margin-bottom: 1rem;">
-                        Start the backend on port 8000: <code>uvicorn app.main:app --port 8000</code>
+                        ${subtext}
                     </p>
                     <button id="as-btn-retry" class="as-tab-btn active" style="margin: 0 auto;">Retry Connection</button>
                 </div>
