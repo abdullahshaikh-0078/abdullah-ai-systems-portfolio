@@ -1,39 +1,194 @@
-/* ===== GLOBAL UTILITIES ===== */
+/* ===== GLOBAL UTILITIES & BUTTONS ===== */
 
 .as-section {
-    padding: var(--as-space-xl) 0;
+    padding: 5rem 0;
+    position: relative;
 }
 
 .as-container {
-    width: 90%;
-    max-width: 1200px;
+    width: min(100% - 32px, 1200px);
     margin: 0 auto;
 }
 
-.as-btn-primary {
-    background-color: var(--as-color-accent);
-    color: #ffffff;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--as-radius-md);
+/* Wide Responsive Container for Left-Aligned Technical Sections (1400px) */
+.as-container-wide {
+    width: min(100% - 48px, 1400px);
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* Intentional Narrow Centered Container for Contact Section */
+.as-contact-container {
+    width: min(100% - 32px, 780px);
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* Left-Aligned Section Header Hierarchy */
+.as-section-header-left {
+    text-align: left;
+    margin-bottom: 2.5rem;
+}
+
+.as-section-header-left .as-section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--muted-foreground);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.65rem;
+}
+
+.as-section-header-left .as-section-title {
+    font-size: clamp(1.75rem, 3.5vw, 2.35rem);
+    font-weight: 800;
+    color: var(--foreground);
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+    line-height: 1.15;
+}
+
+.as-section-header-left .as-section-desc {
+    color: var(--muted-foreground);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 720px;
+    margin: 0 0 1rem 0;
+}
+
+/* Global Subtle Theme Transitions */
+html,
+body,
+.as-navbar,
+.as-project-card,
+.as-card,
+.as-tag,
+.as-btn,
+.as-modal-container {
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Base Button System (True Black + White) */
+.as-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    font-weight: 600;
+    height: 40px;
+    padding: 0 1.15rem;
+    border-radius: var(--radius-md);
+    text-decoration: none;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: all var(--transition);
+    border: 1px solid transparent;
+    line-height: 1;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+.as-btn:focus-visible {
+    outline: 2px solid var(--foreground);
+    outline-offset: 2px;
+}
+
+.as-btn-primary {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    border-color: var(--primary);
 }
 
 .as-btn-primary:hover {
     opacity: 0.9;
+    transform: translateY(-1px);
+    color: var(--primary-foreground);
 }
 
 .as-btn-secondary {
-    background-color: transparent;
-    color: var(--as-color-text-primary);
-    border: 1px solid var(--as-color-border);
-    padding: 0.75rem 1.5rem;
-    border-radius: var(--as-radius-md);
-    cursor: pointer;
-    transition: 0.3s ease;
+    background-color: var(--surface);
+    color: var(--foreground);
+    border: 1px solid var(--border);
 }
 
 .as-btn-secondary:hover {
-    background-color: var(--as-color-bg-secondary);
+    background-color: var(--surface-hover);
+    border-color: var(--border-strong);
+    color: var(--foreground);
+    transform: translateY(-1px);
+}
+
+.as-btn-outline {
+    background-color: transparent;
+    color: var(--muted-foreground);
+    border: 1px solid var(--border);
+}
+
+.as-btn-outline:hover {
+    border-color: var(--border-strong);
+    color: var(--foreground);
+    background-color: var(--muted);
+}
+
+.as-btn-sm {
+    height: 32px;
+    padding: 0 0.85rem;
+    font-size: 0.8125rem;
+    border-radius: var(--radius-sm);
+}
+
+/* Subtle Technical Grid (Minimal, No Neon Glows) */
+.as-grid-bg {
+    background-color: var(--background);
+    background-image:
+        linear-gradient(to right, var(--border) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    background-size: 56px 56px;
+    background-position: center top;
+}
+
+/* Shared Technology Tag / Pill System */
+.as-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-sm);
+    background: var(--tech-tag-bg);
+    border: 1px solid var(--tech-tag-border);
+    color: var(--tech-tag-text);
+    transition: border-color var(--transition), color var(--transition);
+}
+
+.as-tag:hover {
+    border-color: var(--border-strong);
+    color: var(--foreground);
+}
+
+.as-tag.as-tag-accent {
+    background: var(--surface-elevated);
+    border-color: var(--border-strong);
+    color: var(--foreground);
+    font-weight: 600;
+}
+
+/* Screen Reader Only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }

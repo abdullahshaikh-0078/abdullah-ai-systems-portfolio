@@ -1,55 +1,244 @@
-/* ===== HERO LAYOUT ===== */
+/* ==========================================================================
+   PREMIUM EDITORIAL HERO SECTION (BROWN & NAVY PALETTE)
+   Inspired by Kazio Labs: Full-width workspace photograph background,
+   refined typography, directional contrast scrim, and immediate normal scroll.
+   ========================================================================== */
 
 .as-hero {
-
     position: relative;
-
+    width: 100%;
+    min-height: clamp(580px, 82vh, 760px);
     display: flex;
     align-items: center;
-
-    min-height: 85vh;
-
+    padding-top: 5rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid var(--border);
+    background-color: var(--background);
+    background-image: var(--hero-scrim), url('../../assets/images/editorial-workspace-hero.jpg');
+    background-size: cover;
+    background-position: right center;
+    background-repeat: no-repeat;
     overflow: hidden;
-
 }
 
-/* canvas background */
+/* Backdrop layer: Disabled to prevent double-scrimming the background photograph */
+.as-hero::before {
+    display: none !important;
+}
 
-#as-hero-canvas {
-
+/* Subtle bottom blend into the next section */
+.as-hero::after {
+    content: '';
     position: absolute;
-
-    top: 0;
+    bottom: 0;
     left: 0;
-
-    width: 100%;
-    height: 100%;
-
-    z-index: 0;
-
-}
-
-/* content above canvas */
-
-.as-hero-content {
-
-    position: relative;
-    max-width: 700px;
+    right: 0;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent, rgba(16, 26, 40, 0.75) 60%, var(--background) 100%);
+    pointer-events: none;
     z-index: 1;
-
 }
 
-.as-hero-subtitle {
+/* In light theme, keep bottom blend refined and tight (50px) to preserve notebook clarity */
+:root.as-light-theme .as-hero::after,
+body.as-light-theme .as-hero::after {
+    height: 50px;
+    background: linear-gradient(to bottom, transparent, rgba(247, 244, 238, 0.85) 60%, var(--background) 100%);
+}
 
-    max-width: 600px;
+.as-hero-container {
+    position: relative;
+    z-index: 2;
+    width: min(100% - 48px, 1360px);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+}
 
-    margin-bottom: var(--as-space-md);
+/* LEFT EDITORIAL CONTENT BLOCK */
+.as-hero-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    max-width: 660px;
+    padding: 1.5rem 0;
+}
 
+.as-hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--primary-accent);
+    background: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-full);
+    margin-bottom: 1.25rem;
+}
+
+.as-eyebrow-pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--success);
+    flex-shrink: 0;
+}
+
+.as-hero-name {
+    font-size: clamp(0.95rem, 1.4vw, 1.125rem);
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    margin: 0 0 0.5rem 0;
+}
+
+.as-hero-heading {
+    font-size: clamp(2.35rem, 4.2vw, 3.65rem);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.12;
+    margin: 0 0 1.25rem 0;
+    color: var(--foreground);
+    max-width: 640px;
+}
+
+.as-hero-subheading {
+    font-size: clamp(1.05rem, 1.8vw, 1.2rem);
+    font-weight: 400;
+    color: var(--muted-foreground);
+    line-height: 1.6;
+    max-width: 580px;
+    margin: 0 0 2rem 0;
+    letter-spacing: -0.01em;
 }
 
 .as-hero-actions {
-
     display: flex;
+    align-items: center;
     gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
 
+.as-hero-actions .as-btn {
+    height: 44px;
+    padding: 0 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all var(--transition);
+}
+
+/* Primary Button: Rich Brown in Light, Warm Caramel in Dark */
+.as-btn-primary {
+    background-color: var(--primary);
+    color: var(--primary-foreground) !important;
+    border: 1px solid var(--primary);
+}
+
+.as-btn-primary:hover {
+    background-color: var(--primary-accent-hover);
+    border-color: var(--primary-accent-hover);
+    color: var(--primary-foreground) !important;
+    transform: translateY(-1px);
+}
+
+/* Secondary Button: Clean Neutral Surface with Subtle Border */
+.as-btn-secondary {
+    background-color: var(--secondary);
+    color: var(--secondary-foreground) !important;
+    border: 1px solid var(--border);
+}
+
+.as-btn-secondary:hover {
+    background-color: var(--surface-hover);
+    border-color: var(--border-strong);
+    color: var(--secondary-foreground) !important;
+    transform: translateY(-1px);
+}
+
+.as-hero-socials {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    width: 100%;
+    max-width: 480px;
+}
+
+.as-social-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted-foreground);
+    text-decoration: none;
+    transition: color var(--transition);
+}
+
+.as-social-link:hover {
+    color: var(--foreground);
+}
+
+/* RESPONSIVE HERO */
+@media (max-width: 1024px) {
+    .as-hero {
+        background-position: 70% center;
+    }
+    
+    .as-hero-left {
+        max-width: 580px;
+        background: rgba(var(--background), 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 1.5rem;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+    }
+}
+
+@media (max-width: 768px) {
+    .as-hero {
+        min-height: auto;
+        padding-top: 5rem;
+        padding-bottom: 3.5rem;
+        background-image: var(--hero-scrim-mobile), url('../../assets/images/editorial-workspace-hero.jpg');
+        background-position: center;
+    }
+    
+    .as-hero-left {
+        max-width: 100%;
+        background: transparent;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        padding: 0;
+        border: none;
+    }
+    
+    .as-hero-heading {
+        font-size: 2.25rem;
+    }
+    
+    .as-hero-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .as-hero-actions .as-btn {
+        width: 100%;
+    }
 }

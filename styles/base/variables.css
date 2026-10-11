@@ -1,57 +1,215 @@
-:root {
+/* ==========================================================================
+   PREMIUM BROWN & NAVY DESIGN TOKEN SYSTEM
+   Inspired by Kazio Labs: Warm brown, deep navy, warm ivory, and deep espresso
+   Cohesive across all components in both Light and Dark themes.
+   ========================================================================== */
 
-    /* ===== DARK THEME (DEFAULT) ===== */
+/* DARK THEME (DEFAULT / DARK MODE) */
+:root,
+:root[data-theme="dark"] {
+    /* Base Color Tokens */
+    --background: #101A28;            /* Deep navy main background */
+    --foreground: #F5F0E8;            /* Warm ivory primary text */
+    --muted: #132032;                 /* Soft navy section background */
+    --muted-foreground: #B7C0CB;      /* Secondary muted gray-blue text */
+    
+    --surface: #172435;               /* Card & panel surface */
+    --surface-hover: #1D2D40;         /* Elevated surface & card hover */
+    --surface-elevated: #1D2D40;      /* Elevated floating modal / card */
+    
+    --border: #2B3A4D;                /* Subtle navy border */
+    --border-strong: #3D5068;         /* Strong border for interactive elements */
+    
+    /* Brand Accents */
+    --primary-accent: #C49A76;        /* Warm caramel (Brown accent in dark mode) */
+    --primary-accent-hover: #D6AE8C;
+    --primary-accent-text: #101A28;
+    
+    --secondary-accent: #8DA8C5;      /* Muted steel blue (Navy accent in dark mode) */
+    --secondary-accent-hover: #A4BCD6;
+    --secondary-accent-text: #101A28;
 
-    --as-color-bg-primary: #0b0f14;
-    --as-color-bg-secondary: #11161d;
+    /* Semantic Action Tokens */
+    --primary: #C49A76;               /* Warm caramel CTA */
+    --primary-foreground: #101A28;    /* Deep navy text on primary button */
+    
+    --secondary: #172435;             /* Secondary neutral button */
+    --secondary-foreground: #F5F0E8;
+    --secondary-hover: #1D2D40;
 
-    --as-color-text-primary: #e6edf3;
-    --as-color-text-secondary: #9aa4b2;
+    --accent: #1D2D40;
+    --accent-foreground: #F5F0E8;
+    
+    --success: #34D399;
+    --success-bg: rgba(52, 211, 153, 0.12);
+    --danger: #F87171;
 
-    --as-color-border: #1f2933;
+    /* Technical highlights / badges */
+    --tech-tag-bg: #172435;
+    --tech-tag-border: #2B3A4D;
+    --tech-tag-text: #C49A76;
+    --tech-tag-highlight: #F5F0E8;
 
-    /* stronger accents for dark UI */
+    /* Accent Pill Tokens for Projects (replacing legacy cyan & purple) */
+    --pill-navy-bg: rgba(141, 168, 197, 0.15);
+    --pill-navy-border: rgba(141, 168, 197, 0.35);
+    --pill-navy-text: #8DA8C5;
+    
+    --pill-brown-bg: rgba(196, 154, 118, 0.15);
+    --pill-brown-border: rgba(196, 154, 118, 0.35);
+    --pill-brown-text: #C49A76;
 
-    --as-color-accent: #4cc9f0;
-    --as-color-accent-secondary: #9b5cf6;
+    /* Hero Scrim Background (Left solid navy fade to right subtle ambient dark scrim) */
+    --hero-scrim: linear-gradient(
+        to right,
+        rgba(16, 26, 40, 1) 0%,
+        rgba(16, 26, 40, 0.98) 34%,
+        rgba(16, 26, 40, 0.84) 42%,
+        rgba(16, 26, 40, 0.42) 52%,
+        rgba(16, 26, 40, 0.18) 65%,
+        rgba(16, 26, 40, 0.28) 100%
+    );
+    --hero-scrim-mobile: linear-gradient(
+        to bottom,
+        rgba(16, 26, 40, 0.98) 0%,
+        rgba(16, 26, 40, 0.90) 45%,
+        rgba(16, 26, 40, 0.55) 70%,
+        rgba(16, 26, 40, 0.35) 100%
+    );
 
     /* Typography */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-    --as-font-primary: 'Inter', sans-serif;
+    /* Radius System */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
 
-    /* Font Sizes */
+    /* Shadows & Transitions */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.45);
+    --shadow-card-hover: 0 10px 35px rgba(0, 0, 0, 0.65);
+    --transition: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 
-    --as-text-xl: 3rem;
-    --as-text-lg: 2rem;
-    --as-text-md: 1.25rem;
-    --as-text-base: 1rem;
-    --as-text-sm: 0.875rem;
+    /* Glass Navbar */
+    --as-color-bg-glass: rgba(16, 26, 40, 0.92);
 
-    /* Spacing */
-
-    --as-space-xs: 0.5rem;
-    --as-space-sm: 1rem;
-    --as-space-md: 2rem;
-    --as-space-lg: 4rem;
-    --as-space-xl: 6rem;
-
+    /* Backward compatibility aliases */
+    --as-color-bg-primary: var(--background);
+    --as-color-bg-secondary: var(--muted);
+    --as-color-bg-card: var(--surface);
+    --as-color-bg-card-hover: var(--surface-hover);
+    --as-color-text-primary: var(--foreground);
+    --as-color-text-secondary: var(--muted-foreground);
+    --as-color-text-muted: #8E9BAA;
+    --as-color-border: var(--border);
+    --as-color-border-hover: var(--border-strong);
+    --as-color-accent: var(--primary-accent);
+    --as-color-accent-blue: var(--secondary-accent);
+    --as-color-accent-glow: rgba(196, 154, 118, 0.08);
+    --as-color-accent-blue-glow: rgba(141, 168, 197, 0.08);
+    --as-color-success: var(--success);
 }
 
-
-/* ===== LIGHT THEME ===== */
-
+/* LIGHT THEME (WARM IVORY & RICH BROWN / NAVY) */
+:root[data-theme="light"],
+:root.as-light-theme,
 body.as-light-theme {
+    /* Base Color Tokens */
+    --background: #F7F4EE;            /* Warm ivory main background */
+    --foreground: #30241F;            /* Deep espresso primary text */
+    --muted: #EEE7DE;                 /* Soft section background */
+    --muted-foreground: #766A61;      /* Muted brown-gray secondary text */
+    
+    --surface: #FFFFFF;               /* Crisp white card surface */
+    --surface-hover: #F2ECE3;         /* Warm ivory card hover */
+    --surface-elevated: #FFFFFF;      /* Elevated floating surface */
+    
+    --border: #E4DAD0;                /* Warm taupe subtle border */
+    --border-strong: #CFC3B5;         /* Strong border for interactive elements */
+    
+    /* Brand Accents */
+    --primary-accent: #795548;        /* Rich brown accent */
+    --primary-accent-hover: #624237;
+    --primary-accent-text: #FFFFFF;
+    
+    --secondary-accent: #23364D;      /* Deep navy secondary accent */
+    --secondary-accent-hover: #1A293B;
+    --secondary-accent-text: #FFFFFF;
 
-    --as-color-bg-primary: #ffffff;
-    --as-color-bg-secondary: #f7f9fc;
+    /* Semantic Action Tokens */
+    --primary: #795548;               /* Rich brown primary CTA */
+    --primary-foreground: #FFFFFF;    /* White text on rich brown */
+    
+    --secondary: #FFFFFF;             /* Neutral white surface button */
+    --secondary-foreground: #30241F;  /* Deep espresso text */
+    --secondary-hover: #F2ECE3;
 
-    --as-color-text-primary: #0f172a;
-    --as-color-text-secondary: #475569;
+    --accent: #EEE7DE;
+    --accent-foreground: #30241F;
+    
+    --success: #2D7A50;
+    --success-bg: rgba(45, 122, 80, 0.1);
+    --danger: #DC2626;
 
-    --as-color-border: #e5e7eb;
+    /* Technical highlights / badges */
+    --tech-tag-bg: #EEE7DE;
+    --tech-tag-border: #E4DAD0;
+    --tech-tag-text: #503E33;
+    --tech-tag-highlight: #30241F;
 
-    /* accents */
-    --as-color-accent: #7dd9eb;
-    --as-color-accent-secondary: #a889f2;
+    /* Accent Pill Tokens for Projects */
+    --pill-navy-bg: rgba(35, 54, 77, 0.08);
+    --pill-navy-border: rgba(35, 54, 77, 0.25);
+    --pill-navy-text: #23364D;
+    
+    --pill-brown-bg: rgba(121, 85, 72, 0.08);
+    --pill-brown-border: rgba(121, 85, 72, 0.25);
+    --pill-brown-text: #795548;
 
+    /* Hero Scrim Background (Left solid cream fade to right subtle rich dark scrim) */
+    --hero-scrim: linear-gradient(
+        to right,
+        rgba(247, 244, 238, 1) 0%,
+        rgba(247, 244, 238, 1) 34%,
+        rgba(247, 244, 238, 0.92) 40%,
+        rgba(247, 244, 238, 0.65) 46%,
+        rgba(247, 244, 238, 0.20) 52%,
+        rgba(247, 244, 238, 0) 56%,
+        rgba(20, 24, 34, 0.24) 68%,
+        rgba(16, 26, 40, 0.36) 100%
+    );
+    --hero-scrim-mobile: linear-gradient(
+        to bottom,
+        rgba(247, 244, 238, 0.98) 0%,
+        rgba(247, 244, 238, 0.92) 45%,
+        rgba(247, 244, 238, 0.55) 70%,
+        rgba(16, 26, 40, 0.28) 100%
+    );
+
+    /* Shadows & Transitions */
+    --shadow-sm: 0 1px 3px rgba(48, 36, 31, 0.05);
+    --shadow-card: 0 4px 20px rgba(48, 36, 31, 0.06);
+    --shadow-card-hover: 0 10px 30px rgba(48, 36, 31, 0.12);
+
+    /* Glass Navbar */
+    --as-color-bg-glass: rgba(247, 244, 238, 0.94);
+
+    /* Backward compatibility aliases */
+    --as-color-bg-primary: var(--background);
+    --as-color-bg-secondary: var(--muted);
+    --as-color-bg-card: var(--surface);
+    --as-color-bg-card-hover: var(--surface-hover);
+    --as-color-text-primary: var(--foreground);
+    --as-color-text-secondary: var(--muted-foreground);
+    --as-color-text-muted: #8A7E75;
+    --as-color-border: var(--border);
+    --as-color-border-hover: var(--border-strong);
+    --as-color-accent: var(--primary-accent);
+    --as-color-accent-blue: var(--secondary-accent);
+    --as-color-accent-glow: rgba(121, 85, 72, 0.05);
+    --as-color-accent-blue-glow: rgba(35, 54, 77, 0.05);
+    --as-color-success: var(--success);
 }

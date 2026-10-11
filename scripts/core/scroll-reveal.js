@@ -1,23 +1,39 @@
-const revealElements = document.querySelectorAll(".as-reveal");
+// Scroll Reveal with IntersectionObserver and immediate viewport check
 
-const observer = new IntersectionObserver((entries) => {
+export function initScrollReveal() {
+    const revealElements = document.querySelectorAll(".as-reveal");
+    if (!revealElements.length) return;
 
-    entries.forEach(entry => {
+    if (!('IntersectionObserver' in window)) {
+        revealElements.forEach(el => el.classList.add('as-visible'));
+        return;
+    }
 
-        if (entry.isIntersecting) {
-
-            entry.target.classList.add("as-visible");
-
-            observer.unobserve(entry.target);
-
-        }
-
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("as-visible");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.05,
+        rootMargin: "0px 0px -40px 0px"
     });
 
-}, {
-    threshold: 0.15
-});
+    revealElements.forEach(el => {
+        // If already within or near viewport, make visible immediately
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+            el.classList.add("as-visible");
+        } else {
+            observer.observe(el);
+        }
+    });
+}
 
-revealElements.forEach(el => {
-    observer.observe(el);
-});
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initScrollReveal);
+} else {
+    initScrollReveal();
+}

@@ -1,0 +1,549 @@
+/* ===== NEWSLETTER PREFERENCES MODAL COMPONENT (POLISHED PRODUCTION UI) ===== */
+
+/* Modal Backdrop */
+.as-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    opacity: 0;
+    transition: opacity var(--transition);
+    box-sizing: border-box;
+}
+
+.as-modal-backdrop.open {
+    display: flex;
+    opacity: 1;
+}
+
+/* Modal Shell */
+.as-modal-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-card-hover);
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+    animation: asModalSlideIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes asModalSlideIn {
+    from {
+        transform: translateY(12px) scale(0.985);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Modal Header (Pinned) */
+.as-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem 1.75rem 1.25rem 1.75rem;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    background: var(--surface);
+}
+
+.as-modal-header-content {
+    flex: 1;
+}
+
+.as-modal-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    margin: 0 0 0.35rem 0;
+    line-height: 1.25;
+}
+
+.as-modal-subtitle {
+    font-size: 0.85rem;
+    color: var(--muted-foreground);
+    margin: 0;
+    line-height: 1.45;
+}
+
+.as-modal-close {
+    background: var(--muted);
+    border: 1px solid var(--border);
+    color: var(--muted-foreground);
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all var(--transition);
+    line-height: 1;
+    flex-shrink: 0;
+    padding: 0;
+}
+
+.as-modal-close:hover {
+    color: var(--foreground);
+    border-color: var(--border-strong);
+    background: var(--surface-hover);
+}
+
+/* Modal Scrollable Body */
+.as-modal-body {
+    padding: 1.5rem 1.75rem;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    box-sizing: border-box;
+}
+
+/* Form Sections */
+.as-form-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.as-form-section-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted-foreground);
+    margin: 0;
+}
+
+.as-form-section-desc {
+    font-size: 0.8rem;
+    color: var(--muted-foreground);
+    margin: 0;
+}
+
+/* Form Groups & Inputs */
+.as-form-row-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+}
+
+.as-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.as-form-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--foreground);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.as-required {
+    color: var(--danger);
+    font-weight: 700;
+}
+
+.as-form-input,
+.as-form-select {
+    width: 100%;
+    height: 38px;
+    padding: 0 0.85rem;
+    background: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--foreground);
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    box-sizing: border-box;
+    transition: border-color var(--transition), background var(--transition);
+}
+
+.as-form-input::placeholder {
+    color: var(--muted-foreground);
+}
+
+.as-form-input:focus,
+.as-form-select:focus {
+    outline: none;
+    border-color: var(--border-strong);
+    background: var(--surface);
+}
+
+.as-form-input.as-input-error,
+.as-form-select.as-input-error {
+    border-color: var(--danger) !important;
+}
+
+/* --- Radio Card Styling (Frequency) --- */
+.as-radio-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.as-radio-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1rem;
+    background: var(--muted);
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition), box-shadow var(--transition);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    user-select: none;
+    position: relative;
+    box-sizing: border-box;
+}
+
+.as-radio-card:hover {
+    border-color: var(--border-strong);
+}
+
+.as-radio-card input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.as-radio-indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border-strong);
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color var(--transition);
+    box-sizing: border-box;
+}
+
+.as-radio-indicator::after {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--foreground);
+    display: none;
+}
+
+.as-radio-card:has(input:checked),
+.as-radio-card.selected {
+    border-color: var(--foreground);
+    background: var(--surface);
+}
+
+.as-radio-card:has(input:checked) .as-radio-indicator,
+.as-radio-card.selected .as-radio-indicator {
+    border-color: var(--foreground);
+}
+
+.as-radio-card:has(input:checked) .as-radio-indicator::after,
+.as-radio-card.selected .as-radio-indicator::after {
+    display: block;
+}
+
+.as-radio-text-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.as-radio-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--foreground);
+    line-height: 1.25;
+}
+
+.as-radio-desc {
+    font-size: 0.775rem;
+    color: var(--muted-foreground);
+    line-height: 1.4;
+}
+
+/* Weekly Day Selector (Conditional) */
+.as-weekly-day-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+    margin-top: 0.5rem;
+}
+
+/* --- Selectable Topic Chips --- */
+.as-topic-chips-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+}
+
+.as-topic-chip {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    display: inline-flex;
+}
+
+.as-topic-chip input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.as-topic-chip-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.35rem 0.75rem;
+    border-radius: var(--radius-sm);
+    background: var(--muted);
+    border: 1px solid var(--border);
+    color: var(--muted-foreground);
+    transition: all var(--transition);
+    line-height: 1.3;
+}
+
+.as-topic-chip:hover .as-topic-chip-label {
+    border-color: var(--border-strong);
+    color: var(--foreground);
+}
+
+.as-topic-chip input[type="checkbox"]:checked + .as-topic-chip-label {
+    background: var(--foreground);
+    color: var(--background);
+    border-color: var(--foreground);
+    font-weight: 600;
+}
+
+/* --- Content Preferences Checkboxes --- */
+.as-content-checkboxes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.5rem;
+}
+
+.as-checkbox-card {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--muted);
+    cursor: pointer;
+    transition: border-color var(--transition), background var(--transition);
+    user-select: none;
+    box-sizing: border-box;
+}
+
+.as-checkbox-card:hover {
+    border-color: var(--border-strong);
+}
+
+.as-checkbox-card input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.as-checkbox-indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1.5px solid var(--border-strong);
+    background: var(--surface);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition);
+    box-sizing: border-box;
+}
+
+.as-checkbox-indicator svg {
+    display: none;
+    width: 10px;
+    height: 10px;
+    stroke: var(--background);
+    stroke-width: 3;
+}
+
+.as-checkbox-card:has(input:checked) {
+    border-color: var(--border-strong);
+    background: var(--surface);
+}
+
+.as-checkbox-card:has(input:checked) .as-checkbox-indicator {
+    background: var(--foreground);
+    border-color: var(--foreground);
+}
+
+.as-checkbox-card:has(input:checked) .as-checkbox-indicator svg {
+    display: block;
+}
+
+.as-checkbox-title {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--foreground);
+}
+
+/* --- Delivery Channels --- */
+.as-channels-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.as-channel-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--muted);
+    box-sizing: border-box;
+}
+
+.as-channel-card.as-channel-disabled {
+    border-style: dashed;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.as-channel-left {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--foreground);
+}
+
+.as-channel-status-pill {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.as-channel-status-pill.active {
+    background: var(--success-bg);
+    color: var(--success);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.as-channel-status-pill.coming-soon {
+    background: var(--muted);
+    color: var(--muted-foreground);
+    border: 1px solid var(--border);
+}
+
+/* Inline Modal Feedback */
+.as-modal-feedback {
+    font-size: 0.8125rem;
+    padding: 0.65rem 0.85rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    line-height: 1.45;
+}
+
+.as-modal-feedback.success {
+    background: var(--success-bg);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: var(--success);
+}
+
+.as-modal-feedback.error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: var(--danger);
+}
+
+/* Modal Actions (Pinned at bottom) */
+.as-modal-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1.15rem 1.75rem;
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    flex-shrink: 0;
+}
+
+.as-modal-actions .as-btn {
+    height: 38px;
+    font-size: 0.85rem;
+    padding: 0 1.25rem;
+}
+
+/* ================= MODAL RESPONSIVE ================= */
+@media (max-width: 640px) {
+    .as-modal-backdrop {
+        padding: 0;
+        align-items: flex-end;
+    }
+
+    .as-modal-container {
+        max-width: 100%;
+        max-height: 92vh;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-left: none;
+        border-right: none;
+        border-bottom: none;
+    }
+
+    .as-modal-header {
+        padding: 1.25rem 1.25rem 1rem 1.25rem;
+    }
+
+    .as-modal-body {
+        padding: 1.25rem;
+        gap: 1.25rem;
+    }
+
+    .as-form-row-2col {
+        grid-template-columns: 1fr;
+    }
+
+    .as-radio-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .as-modal-actions {
+        padding: 1rem 1.25rem;
+    }
+}

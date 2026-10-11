@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEXUS RAG - Comprehensive End-to-End System Architecture</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .glow-cyan {
+      box-shadow: 0 0 40px -10px rgba(56, 189, 248, 0.25);
+    }
+    .version-btn.active {
+      background: rgba(56, 189, 248, 0.18);
+      border-color: #38bdf8;
+      color: #ffffff;
+      box-shadow: 0 0 15px -3px rgba(56, 189, 248, 0.35);
+    }
+    .pipeline-card {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .pipeline-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+    .connector-line {
+      background: linear-gradient(to right, rgba(56, 189, 248, 0.2), rgba(56, 189, 248, 0.7), rgba(56, 189, 248, 0.2));
+    }
+  </style>
+</head>
+<body class="bg-[#070b12] text-slate-100 p-3 sm:p-8 min-h-screen">
+
+  <div class="max-w-6xl mx-auto space-y-6">
+
+    <!-- Top Status Banner -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-1 text-xs text-slate-400">
+      <div class="flex items-center gap-2">
+        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse"></span>
+        <span class="font-semibold text-slate-200">PRODUCTION SYSTEM ARCHITECTURE • COMPLETE 10-STAGE PIPELINE</span>
+      </div>
+      <div class="flex items-center gap-3 text-[11px] text-slate-400 mono">
+        <span>FastAPI v0.110</span>
+        <span>•</span>
+        <span>Qdrant HNSW</span>
+        <span>•</span>
+        <span>BM25 Okapi</span>
+        <span>•</span>
+        <span>Gemini AI</span>
+      </div>
+    </div>
+
+    <!-- Main System Showcase Container -->
+    <div class="bg-[#0d1424] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl backdrop-blur-xl glow-cyan space-y-8">
+
+      <!-- Header Section -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5 border-b border-slate-800/80 pb-6">
+        <div>
+          <div class="flex flex-wrap items-center gap-2 mb-2.5">
+            <span class="px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-sky-500/10 text-sky-400 border border-sky-500/30">
+              ENTERPRISE DOCUMENT INTELLIGENCE
+            </span>
+            <span class="px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+              RECALL@10: 85.71%
+            </span>
+            <span class="px-2.5 py-1 rounded-full text-[11px] font-bold tracking-wider uppercase bg-indigo-500/10 text-indigo-400 border border-indigo-500/30">
+              MRR@10: 0.7738
+            </span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+            NEXUS RAG
+          </h1>
+          <p class="text-sm sm:text-base text-slate-400 mt-1 max-w-3xl leading-relaxed">
+            All-Rounder Enterprise RAG Platform: Structure-Aware Document Parsing, Parallel Dense + Sparse Hybrid Search, Deterministic Python AST Math Coprocessor, and Citation Defense.
+          </p>
+        </div>
+
+        <!-- Mode & Switcher Controls -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 shrink-0">
+          <button id="btn-toggle-explain" onclick="toggleExplanationMode()" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800/90 text-slate-200 hover:bg-slate-750 border border-slate-750 transition-all flex items-center justify-center gap-1.5 shadow-sm">
+            <span id="explain-icon">👔</span>
+            <span id="explain-label">Switch to Plain English</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Evolutionary Stage Switcher (v1 to v4) -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between text-xs px-1 text-slate-400">
+          <span class="font-bold tracking-wider uppercase text-slate-200 flex items-center gap-1.5">
+            <span>🔬</span> <span>Architecture Evolutionary Stages &amp; Ablation Milestones</span>
+          </span>
+          <span class="text-slate-500">Select any version to inspect its complete pipeline &amp; metrics</span>
+        </div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <!-- v1 -->
+          <button onclick="selectVersion(1)" id="tab-v1" class="version-btn text-left p-3.5 rounded-xl border border-slate-800 bg-slate-900/60 cursor-pointer transition-all">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-bold text-sky-400 mono">VERSION 01</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">Baseline</span>
+            </div>
+            <div class="text-xs font-bold text-white">Dense Vector Only</div>
+            <div class="text-[11px] text-rose-400 font-semibold mt-1">Exact Recall: 0.0%</div>
+            <div class="text-[10px] text-slate-500 mt-0.5">Failed on exact codes/years</div>
+          </button>
+
+          <!-- v2 -->
+          <button onclick="selectVersion(2)" id="tab-v2" class="version-btn text-left p-3.5 rounded-xl border border-slate-800 bg-slate-900/60 cursor-pointer transition-all">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-bold text-sky-400 mono">VERSION 02</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">Lexical</span>
+            </div>
+            <div class="text-xs font-bold text-white">Sparse BM25 Search</div>
+            <div class="text-[11px] text-amber-400 font-semibold mt-1">Synonym Recall: 14.1%</div>
+            <div class="text-[10px] text-slate-500 mt-0.5">Missed conceptual synonyms</div>
+          </button>
+
+          <!-- v3 -->
+          <button onclick="selectVersion(3)" id="tab-v3" class="version-btn text-left p-3.5 rounded-xl border border-slate-800 bg-slate-900/60 cursor-pointer transition-all">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-bold text-sky-400 mono">VERSION 03</span>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-semibold">Breakthrough</span>
+            </div>
+            <div class="text-xs font-bold text-white">Hybrid Retrieval (RRF)</div>
+            <div class="text-[11px] text-emerald-400 font-semibold mt-1">Hybrid Recall: 71.4%</div>
+            <div class="text-[10px] text-slate-500 mt-0.5">Broken tables &amp; math errors</div>
+          </button>
+
+          <!-- v4 (Active) -->
+          <button onclick="selectVersion(4)" id="tab-v4" class="version-btn active text-left p-3.5 rounded-xl border border-slate-800 bg-slate-900/60 cursor-pointer transition-all">
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="text-[11px] font-bold text-sky-400 mono">VERSION 04</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-bold">Production ★</span>
+            </div>
+            <div class="text-xs font-bold text-white">Full 10-Stage Platform</div>
+            <div class="text-[11px] text-sky-300 font-semibold mt-1">Recall@10: 85.71%</div>
+            <div class="text-[10px] text-slate-500 mt-0.5">Tables + 100% Math Accuracy</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Explanation Box (Swappable Plain English vs Tech View) -->
+      <div id="v-explanation-box" class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-5 text-sm text-slate-300 leading-relaxed space-y-2">
+        <!-- Injected dynamically -->
+      </div>
+
+      <!-- DETAILED 10-STAGE SYSTEM WORKFLOW -->
+      <div class="space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div>
+            <h3 class="text-lg font-bold text-white flex items-center gap-2">
+              <span class="text-sky-400">⚡</span>
+              <span id="workflow-headline">v4 Full-Scale 10-Stage Production Pipeline</span>
+            </h3>
+            <p class="text-xs text-slate-400">
+              Hover over or click any subsystem stage below to inspect its operational mechanics and data transformations.
+            </p>
+          </div>
+          <div class="flex items-center gap-3 text-[11px] mono text-slate-400">
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-sky-400"></span> Ingestion</span>
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-purple-400"></span> Retrieval</span>
+            <span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Verification</span>
+          </div>
+        </div>
+
+        <!-- 10 Granular Pipeline Stages (Grid / Flow) -->
+        <div id="pipeline-nodes-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-3">
+          <!-- Dynamically populated according to active version -->
+        </div>
+
+        <!-- Dynamic Node Deep-Dive Inspector Box -->
+        <div id="node-inspector" class="bg-slate-950 border border-sky-900/40 rounded-xl p-4 sm:p-5 text-xs sm:text-sm space-y-2">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 border-b border-slate-800 pb-2">
+            <div class="flex items-center gap-2">
+              <span id="inspect-number" class="text-xs px-2 py-0.5 rounded bg-sky-500/20 text-sky-400 font-bold mono">STAGE 01</span>
+              <strong id="inspect-title" class="text-white text-base font-bold">Multi-Format Document Parsing &amp; Layout Analysis</strong>
+            </div>
+            <span id="inspect-tech" class="text-xs text-sky-300 mono bg-slate-900 px-2.5 py-1 rounded border border-slate-800">PyMuPDF • pdfplumber • LayoutParser</span>
+          </div>
+          <p id="inspect-desc" class="text-slate-300 leading-relaxed">
+            Ingests heterogeneous source documents (PDFs, SEC 10-K financial reports, DOCX, spreadsheets). Separates prose paragraphs from multi-column tables, visual charts, and document footnotes to preserve semantic layout fidelity.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
+            <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-800">
+              <span class="text-slate-400 font-semibold block mb-0.5">Input Data:</span>
+              <span id="inspect-input" class="text-slate-200 mono">Raw byte streams, PDF buffers, scanned pages</span>
+            </div>
+            <div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-800">
+              <span class="text-slate-400 font-semibold block mb-0.5">Output Data:</span>
+              <span id="inspect-output" class="text-emerald-400 mono">Normalized text blocks, table coordinate bounding boxes</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hard Proven Evaluation Metrics Grid -->
+      <div class="space-y-3 pt-2">
+        <h3 class="text-sm font-bold text-slate-300 uppercase tracking-wider">
+          Empirical Evaluation Benchmark (SEC 10-K Query Harness)
+        </h3>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+          <div class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+              <span>Recall@10</span>
+              <span class="text-emerald-400">📈 +85.7%</span>
+            </div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400 mono mt-1" id="m-recall">85.71%</div>
+            <div class="text-[11px] text-slate-500 mt-1" id="m-recall-sub">Up from 0.0% in v1 baseline</div>
+          </div>
+
+          <div class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+              <span>MRR@10 (Mean Reciprocal)</span>
+              <span class="text-sky-400">⚡ Top 1-2</span>
+            </div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-sky-400 mono mt-1" id="m-mrr">0.7738</div>
+            <div class="text-[11px] text-slate-500 mt-1">Ground-truth answer rank</div>
+          </div>
+
+          <div class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+              <span>Arithmetic Precision</span>
+              <span class="text-indigo-400">🧮 Exact</span>
+            </div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-indigo-400 mono mt-1" id="m-math">100%</div>
+            <div class="text-[11px] text-slate-500 mt-1">Zero LLM math hallucinations</div>
+          </div>
+
+          <div class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4">
+            <div class="flex items-center justify-between text-xs text-slate-400">
+              <span>Adversarial Defense</span>
+              <span class="text-purple-400">🛡️ Guardrail</span>
+            </div>
+            <div class="text-2xl sm:text-3xl font-extrabold text-purple-400 mono mt-1">Protected</div>
+            <div class="text-[11px] text-slate-500 mt-1">Rejects out-of-domain queries</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tech Stack Matrix -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-slate-800/80">
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-xs text-slate-400 font-semibold mr-1">Active Production Stack:</span>
+          <span class="px-2.5 py-1 rounded-md text-xs bg-slate-800/90 text-slate-300 border border-slate-700">Python 3.11</span>
+          <span class="px-2.5 py-1 rounded-md text-xs bg-slate-800/90 text-slate-300 border border-slate-700">FastAPI</span>
+          <span class="px-2.5 py-1 rounded-md text-xs bg-slate-800/90 text-slate-300 border border-slate-700">Qdrant Vector DB</span>
+          <span class="px-2.5 py-1 rounded-md text-xs bg-slate-800/90 text-slate-300 border border-slate-700">BM25 Okapi</span>
+          <span class="px-2.5 py-1 rounded-md text-xs bg-slate-800/90 text-slate-300 border border-slate-700">Reciprocal Rank Fusion</span>
+          <span class="px-2.5 py-1 rounded-md text-xs bg-slate-800/90 text-slate-300 border border-slate-700">Sentence-Transformers (768d)</span>
+          <span class="px-2.5 py-1 rounded-md text-xs bg-slate-800/90 text-slate-300 border border-slate-700">MongoDB</span>
+          <span class="px-2.5 py-1 rounded-md text-xs bg-slate-800/90 text-slate-300 border border-slate-700">Google Gemini</span>
+          <span class="px-2.5 py-1 rounded-md text-xs bg-slate-800/90 text-slate-300 border border-slate-700">Python AST Coprocessor</span>
+        </div>
+
+        <div class="flex items-center gap-3 shrink-0">
+          <button class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-750 text-slate-200 border border-slate-700 transition-colors">
+            GitHub Repository &rarr;
+          </button>
+          <button class="px-4 py-2 rounded-xl text-xs font-semibold bg-sky-500 hover:bg-sky-400 text-white transition-colors shadow-md">
+            Interactive RAG Sandbox
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    let activeVersion = 4;
+    let isPlainEnglish = false;
+
+    // Detailed 10-Stage Pipeline Definitions for Version 4
+    const v4Stages = [
+      {
+        num: "01",
+        name: "Document Ingestion",
+        sub: "PDFs, SEC 10-K, Word",
+        tech: "PyMuPDF • pdfplumber",
+        type: "ingest",
+        desc: "Ingests raw multi-page corporate filings, research whitepapers, and financial statements. Cleans formatting artifacts and detects page boundaries.",
+        input: "Raw unstructured files (PDF, DOCX)",
+        output: "Normalized document streams with layout tags"
+      },
+      {
+        num: "02",
+        name: "Table Reconstruction",
+        sub: "Preserves Row/Col Schema",
+        tech: "Custom Table Parser",
+        type: "ingest",
+        desc: "Prevents the classic RAG failure of slicing tables into meaningless chunks. Identifies financial balance sheets and extracts them as structured Markdown/JSON tables.",
+        input: "Multi-column raw page grids",
+        output: "Structured Markdown table objects"
+      },
+      {
+        num: "03",
+        name: "Contextual Chunking",
+        sub: "500-Token + Overlap",
+        tech: "Hierarchy Chunker",
+        type: "ingest",
+        desc: "Segments prose into 500-token contextual windows with 100-token sliding overlap. Injects document title, fiscal year, and section header into every chunk metadata.",
+        input: "Full parsed documents",
+        output: "Context-enriched chunk units with metadata"
+      },
+      {
+        num: "04",
+        name: "Parallel Dual Indexing",
+        sub: "Dense & Sparse Streams",
+        tech: "Qdrant + BM25 Okapi",
+        type: "retrieval",
+        desc: "Concurrently indexes every chunk into two distinct engines: 768-dim dense vectors via Sentence-Transformers into Qdrant, and tokenized keyword inverted index via BM25.",
+        input: "Enriched text chunks",
+        output: "Qdrant HNSW Collection + BM25 Lexical Index"
+      },
+      {
+        num: "05",
+        name: "Query Intent Routing",
+        sub: "Math vs Synthesis Intent",
+        tech: "Syntactic Query Classifier",
+        type: "retrieval",
+        desc: "When a user asks a question, this classifier detects if the query is conceptual ('What are the risks?') or quantitative ('Calculate the YoY operating margin growth rate').",
+        input: "User query string",
+        output: "Intent route: [ARITHMETIC_CALC] or [SEMANTIC_SYNTHESIS]"
+      },
+      {
+        num: "06",
+        name: "Concurrent Retrieval",
+        sub: "Dense ANN + Keyword",
+        tech: "Async Execution Pool",
+        type: "retrieval",
+        desc: "Dispatches the query in parallel to Qdrant (retrieving top-50 semantic candidates) and BM25 (retrieving top-50 exact lexical match candidates).",
+        input: "Normalized query tokens",
+        output: "Top-50 Dense Candidates + Top-50 Sparse Candidates"
+      },
+      {
+        num: "07",
+        name: "Reciprocal Rank Fusion",
+        sub: "RRF Algorithm (k=60)",
+        tech: "Mathematical Rank Merger",
+        type: "retrieval",
+        desc: "Merges the dense and sparse candidate rankings into an authoritative unified order using the formula RRF(d) = SUM(1 / (60 + rank)). Drops low-confidence outliers.",
+        input: "Dual 50-candidate ranked lists",
+        output: "Top-10 Fused Context Candidates"
+      },
+      {
+        num: "08",
+        name: "Deterministic Math AST",
+        sub: "Zero Hallucination Logic",
+        tech: "Python AST Coprocessor",
+        type: "verify",
+        desc: "If arithmetic intent was flagged, numbers are extracted from verified table chunks and computed deterministically using Python code. The LLM is NEVER allowed to guess math.",
+        input: "Extracted table metrics & math expression",
+        output: "100% mathematically verified numeric answer"
+      },
+      {
+        num: "09",
+        name: "Grounded Synthesis",
+        sub: "Citations & Evidence",
+        tech: "Google Gemini AI",
+        type: "verify",
+        desc: "Synthesizes clear narrative responses anchored strictly to retrieved evidence. Explicitly includes inline bracketed citations referencing source filename and page numbers.",
+        input: "Top chunks + Grounding System Prompt",
+        output: "Narrative response with [Page X, Doc Y] citations"
+      },
+      {
+        num: "10",
+        name: "Negative Query Defense",
+        sub: "Hallucination Rejection",
+        tech: "Confidence Guardrail",
+        type: "verify",
+        desc: "If the retrieved evidence does not contain sufficient factual grounds to answer the query, the system safely outputs a formal rejection instead of fabricating answers.",
+        input: "Draft answer + source confidence check",
+        output: "Verified final answer OR Safe rejection message"
+      }
+    ];
+
+    // Pipeline Definitions for v1, v2, v3
+    const v1Stages = [
+      { num: "01", name: "Doc Ingestion", sub: "Naive 500-char split", tech: "Standard Splitter", type: "ingest", desc: "Naive character splitting that blindly chopped sentences and balance sheet tables in half.", input: "Raw text", output: "Broken text chunks" },
+      { num: "02", name: "Embedding Model", sub: "Dense Vector Generation", tech: "Sentence-Transformers", type: "retrieval", desc: "Generated 768-dim embeddings for all chunks.", input: "Text chunks", output: "Vector embeddings" },
+      { num: "03", name: "Qdrant Vector DB", sub: "Cosine Similarity Only", tech: "Qdrant HNSW", type: "retrieval", desc: "Looked up top-K vectors. Failed completely when searching for exact ticker symbols, fiscal codes, or specific table cells.", input: "Query vector", output: "Semantically close chunks" },
+      { num: "04", name: "Gemini Generation", sub: "Stochastic Generation", tech: "Gemini 1.5", type: "verify", desc: "LLM attempted to read broken table chunks and hallucinated arithmetic calculations.", input: "Unverified context", output: "Answer with 0.0% entity recall" }
+    ];
+
+    const v2Stages = [
+      { num: "01", name: "Doc Tokenization", sub: "Stopwords & Lowercase", tech: "RegEx Tokenizer", type: "ingest", desc: "Extracted exact keywords, ignoring document layout and tables.", input: "Raw text", output: "Token streams" },
+      { num: "02", name: "BM25 Inverted Index", sub: "Sparse Term Frequency", tech: "BM25 Okapi", type: "retrieval", desc: "Indexed exact keywords. Found exact numbers well, but failed on synonyms.", input: "Query tokens", output: "Exact term matches" },
+      { num: "03", name: "Gemini Generation", sub: "Keyword Context", tech: "Gemini 1.5", type: "verify", desc: "Good on exact acronyms, but missed 85% of queries phrased in natural language synonyms.", input: "BM25 chunks", output: "14.1% synonym recall" }
+    ];
+
+    const v3Stages = [
+      { num: "01", name: "Doc Ingestion", sub: "Dual Index Pipeline", tech: "FastAPI Pipeline", type: "ingest", desc: "Ingested text into both vector and lexical systems simultaneously.", input: "Documents", output: "Dual indexed collections" },
+      { num: "02", name: "Dense ANN Stream", sub: "Qdrant Vector DB", tech: "Sentence-Transformers", type: "retrieval", desc: "Searched semantic vector similarity.", input: "Query embedding", output: "Dense candidates" },
+      { num: "03", name: "Sparse BM25 Stream", sub: "Inverted Index", tech: "BM25 Okapi", type: "retrieval", desc: "Searched exact keyword occurrences.", input: "Query keywords", output: "Sparse candidates" },
+      { num: "04", name: "RRF Fusion Ranker", sub: "Rank Normalization", tech: "RRF Algorithm (k=60)", type: "retrieval", desc: "Combined ranks from both channels, lifting recall to 71.4%.", input: "Dense + Sparse ranks", output: "Fused candidates" },
+      { num: "05", name: "Gemini Generation", sub: "Fused Context", tech: "Gemini 1.5", type: "verify", desc: "Still suffered from broken tables and occasional LLM arithmetic errors.", input: "Fused chunks", output: "71.4% recall, but math errors" }
+    ];
+
+    const versionMeta = {
+      1: {
+        headline: "v1: Naive Dense Vector Retrieval (Dense Baseline)",
+        stages: v1Stages,
+        recall: "0.0%",
+        recallSub: "Failed on exact entities & codes",
+        mrr: "0.2100",
+        math: "Hallucinated",
+        layman: "<strong>Simple Analogy:</strong> Searching only by the general 'mood' of a book. If you ask for 'risk factors', it works. But if you ask for a specific code like 'Item 7A' or a specific date, it fails completely because vector math approximates meaning and misses exact keywords.",
+        tech: "<strong>Architecture:</strong> Single-stream dense vector search. Standard fixed-window chunking without layout awareness. 768-dim embeddings in Qdrant. Critical failure mode: 0.0% recall on specific financial entity queries and exact table lookups."
+      },
+      2: {
+        headline: "v2: Sparse Lexical Retrieval (BM25 Keyword Search)",
+        stages: v2Stages,
+        recall: "62.5%",
+        recallSub: "High exact match, low semantic",
+        mrr: "0.4500",
+        math: "Hallucinated",
+        layman: "<strong>Simple Analogy:</strong> Think of browser Ctrl+F search. If you type the exact word 'Item 7A', it jumps straight to it! But if you ask 'How does the company make money?', it finds nothing unless the author used the exact words 'make money'.",
+        tech: "<strong>Architecture:</strong> Inverted index lexical retrieval via BM25 Okapi algorithm. Fixed entity matching, but synonym and conceptual recall dropped to 14.1% because it has zero semantic awareness."
+      },
+      3: {
+        headline: "v3: Dual-Channel Hybrid Retrieval with RRF Fusion",
+        stages: v3Stages,
+        recall: "71.4%",
+        recallSub: "Balanced semantic & lexical",
+        mrr: "0.6120",
+        math: "Stochastic",
+        layman: "<strong>Simple Analogy:</strong> We paired two detectives! Detective A searches for exact keywords (BM25), while Detective B searches for conceptual meaning (Dense Vectors). A mathematical referee (RRF) merges their findings.",
+        tech: "<strong>Architecture:</strong> Dual-channel retrieval with Reciprocal Rank Fusion (RRF, constant k=60). Balanced vector drift and vocabulary mismatch, achieving 71.4% Recall. Tables were still sliced arbitrarily, causing math errors."
+      },
+      4: {
+        headline: "v4: Comprehensive 10-Stage Production RAG Platform",
+        stages: v4Stages,
+        recall: "85.71%",
+        recallSub: "State-of-the-Art Benchmark",
+        mrr: "0.7738",
+        math: "100% Exact",
+        layman: "<strong>Simple Analogy:</strong> The complete enterprise solution. Instead of tearing book pages in half, it preserves full tables. And when you ask for calculations ('what was the profit growth percentage?'), it uses a genuine Python calculator so the AI never makes up numbers!",
+        tech: "<strong>Architecture:</strong> End-to-end 10-stage production pipeline: PyMuPDF structure parsing, table preservation, parallel Qdrant/BM25 indexing, intent routing, RRF fusion, Python AST math coprocessor, and citation guardrails."
+      }
+    };
+
+    function selectVersion(v) {
+      activeVersion = v;
+
+      // Update tabs
+      for (let i = 1; i <= 4; i++) {
+        const tab = document.getElementById(`tab-v${i}`);
+        if (i === v) {
+          tab.classList.add('active');
+        } else {
+          tab.classList.remove('active');
+        }
+      }
+
+      const meta = versionMeta[v];
+      document.getElementById('workflow-headline').textContent = meta.headline;
+      document.getElementById('m-recall').textContent = meta.recall;
+      document.getElementById('m-recall-sub').textContent = meta.recallSub;
+      document.getElementById('m-mrr').textContent = meta.mrr;
+      document.getElementById('m-math').textContent = meta.math;
+
+      updateExplanation();
+      renderPipelineNodes(meta.stages);
+    }
+
+    function renderPipelineNodes(stages) {
+      const container = document.getElementById('pipeline-nodes-container');
+      container.innerHTML = '';
+
+      stages.forEach((stage, idx) => {
+        let borderColor = 'border-slate-800';
+        let badgeColor = 'text-sky-400 bg-sky-500/10';
+        if (stage.type === 'retrieval') {
+          borderColor = 'border-indigo-900/50';
+          badgeColor = 'text-indigo-400 bg-indigo-500/10';
+        } else if (stage.type === 'verify') {
+          borderColor = 'border-emerald-900/50';
+          badgeColor = 'text-emerald-400 bg-emerald-500/10';
+        }
+
+        const card = document.createElement('div');
+        card.className = `pipeline-card p-3.5 rounded-xl border ${borderColor} bg-slate-900/70 cursor-pointer flex flex-col justify-between`;
+        card.onclick = () => inspectStage(stage);
+
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-1.5">
+              <span class="mono text-[10px] font-bold ${badgeColor} px-1.5 py-0.5 rounded">${stage.num}</span>
+              <span class="text-[10px] text-slate-500 mono truncate max-w-[100px]">${stage.tech.split('•')[0]}</span>
+            </div>
+            <div class="text-xs font-bold text-white leading-snug">${stage.name}</div>
+            <div class="text-[11px] text-slate-400 mt-1 leading-tight">${stage.sub}</div>
+          </div>
+          <div class="mt-3 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500">
+            <span>Click to inspect</span>
+            <span class="text-sky-400">&rarr;</span>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Default inspect first stage
+      if (stages.length > 0) {
+        inspectStage(stages[0]);
+      }
+    }
+
+    function inspectStage(stage) {
+      document.getElementById('inspect-number').textContent = `STAGE ${stage.num}`;
+      document.getElementById('inspect-title').textContent = stage.name;
+      document.getElementById('inspect-tech').textContent = stage.tech;
+      document.getElementById('inspect-desc').textContent = stage.desc;
+      document.getElementById('inspect-input').textContent = stage.input;
+      document.getElementById('inspect-output').textContent = stage.output;
+    }
+
+    function toggleExplanationMode() {
+      isPlainEnglish = !isPlainEnglish;
+      const btnIcon = document.getElementById('explain-icon');
+      const btnLabel = document.getElementById('explain-label');
+      if (isPlainEnglish) {
+        btnIcon.textContent = '⚙️';
+        btnLabel.textContent = 'Switch to Tech Architecture';
+      } else {
+        btnIcon.textContent = '👔';
+        btnLabel.textContent = 'Switch to Plain English';
+      }
+      updateExplanation();
+    }
+
+    function updateExplanation() {
+      const meta = versionMeta[activeVersion];
+      const box = document.getElementById('v-explanation-box');
+      if (isPlainEnglish) {
+        box.innerHTML = `
+          <div class="flex items-center gap-2 text-sky-300 font-semibold text-xs uppercase tracking-wider mb-1">
+            <span>👔</span> <span>Plain English / Layman Business Overview:</span>
+          </div>
+          <div class="text-slate-300 leading-relaxed text-sm">${meta.layman}</div>
+        `;
+      } else {
+        box.innerHTML = `
+          <div class="flex items-center gap-2 text-indigo-300 font-semibold text-xs uppercase tracking-wider mb-1">
+            <span>⚙️</span> <span>Engineering Architecture &amp; Technical Mechanics:</span>
+          </div>
+          <div class="text-slate-300 leading-relaxed text-sm">${meta.tech}</div>
+        `;
+      }
+    }
+
+    // Initialize with v4
+    selectVersion(4);
+  </script>
+
+</body>
+</html>

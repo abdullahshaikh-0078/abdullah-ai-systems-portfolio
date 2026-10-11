@@ -1,0 +1,406 @@
+/* ===== AI NEWS INTELLIGENCE PRODUCT SECTION ===== */
+
+.as-flagship-section {
+    padding: 3.5rem 0;
+    position: relative;
+    border-bottom: 1px solid var(--border);
+    scroll-margin-top: 80px;
+}
+
+.as-flagship-container {
+    width: min(100% - 48px, 1400px);
+    margin: 0 auto;
+}
+
+/* Section Header */
+.as-flagship-badge-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.as-flagship-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    background: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.85rem;
+    border-radius: var(--radius-full);
+}
+
+.as-flagship-title {
+    font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-top: 0.75rem;
+    margin-bottom: 0.45rem;
+    color: var(--foreground);
+    text-align: center;
+}
+
+.as-flagship-tagline {
+    font-size: 0.95rem;
+    color: var(--muted-foreground);
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ================= MAIN AI NEWS PRODUCT CARD ================= */
+.as-ainews-product-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    margin-top: 1.75rem;
+    transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.as-ainews-product-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow-card);
+}
+
+.as-ainews-card-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    min-height: 0;
+}
+
+/* --- Left Column: Digest Info & Pipeline Visualization --- */
+.as-ainews-info-col {
+    padding: 2.25rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+.as-ainews-badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    background: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    width: fit-content;
+    margin-bottom: 0.65rem;
+}
+
+.as-ainews-headline {
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.25;
+}
+
+.as-ainews-subtext {
+    font-size: 0.925rem;
+    color: var(--muted-foreground);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Compact Technical Pipeline Visualization (Content-Driven) */
+.as-ainews-pipeline-box {
+    background: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.as-ainews-pipe-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    width: 100%;
+}
+
+.as-ainews-pipe-node {
+    font-family: var(--font-mono);
+    font-size: 0.775rem;
+    font-weight: 500;
+    color: var(--foreground);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 0.35rem 1.15rem;
+    border-radius: var(--radius-sm);
+    text-align: center;
+    min-width: 150px;
+    box-sizing: border-box;
+    transition: border-color var(--transition);
+    line-height: 1.25;
+}
+
+.as-ainews-pipe-node.as-pipe-final {
+    background: var(--foreground);
+    color: var(--background);
+    border-color: var(--foreground);
+    font-weight: 600;
+}
+
+.as-ainews-pipe-arrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    line-height: 1;
+}
+
+.as-ainews-pipeline-caption {
+    font-size: 0.8125rem;
+    color: var(--muted-foreground);
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+}
+
+/* --- Right Column: Newsletter Subscription Card --- */
+.as-ainews-subscribe-col {
+    background: var(--muted);
+    border-left: 1px solid var(--border);
+    padding: 2.25rem 2.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+.as-subscribe-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    width: 100%;
+}
+
+.as-subscribe-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    margin: 0;
+    line-height: 1.25;
+}
+
+.as-subscribe-desc {
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+    line-height: 1.55;
+    margin: 0 0 0.5rem 0;
+}
+
+/* Native Newsletter Form */
+.as-native-newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+}
+
+.as-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    width: 100%;
+}
+
+.as-field-label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--foreground);
+}
+
+.as-field-row {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.as-native-input {
+    height: 40px;
+    padding: 0 0.85rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--foreground);
+    font-family: var(--font-primary);
+    font-size: 0.875rem;
+    flex: 1;
+    box-sizing: border-box;
+    transition: border-color var(--transition);
+}
+
+.as-native-input::placeholder {
+    color: var(--muted-foreground);
+}
+
+.as-native-input:focus {
+    outline: none;
+    border-color: var(--border-strong);
+    background: var(--surface);
+}
+
+/* Customize Preferences Trigger (Small secondary action) */
+.as-customize-row {
+    display: flex;
+    align-items: center;
+}
+
+.as-customize-action-btn {
+    background: transparent;
+    border: none;
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0;
+    transition: color var(--transition);
+}
+
+.as-customize-action-btn:hover {
+    color: var(--foreground);
+    text-decoration: underline;
+}
+
+.as-customize-action-btn svg {
+    flex-shrink: 0;
+}
+
+/* Subtle microcopy (no emojis, restrained) */
+.as-newsletter-microcopy {
+    font-size: 0.775rem;
+    color: var(--muted-foreground);
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    line-height: 1.4;
+}
+
+.as-micro-bullet {
+    color: var(--border-strong);
+    font-size: 0.75rem;
+}
+
+/* Inline Form Feedback */
+.as-newsletter-feedback {
+    font-size: 0.8125rem;
+    padding: 0.6rem 0.85rem;
+    border-radius: var(--radius-sm);
+    margin-top: 0.35rem;
+    border: 1px solid transparent;
+    text-align: left;
+}
+
+.as-newsletter-feedback.success {
+    background: var(--success-bg);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: var(--success);
+}
+
+.as-newsletter-feedback.error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: var(--danger);
+}
+
+/* --- Bottom Card Footer: Case Study & GitHub Actions --- */
+.as-ainews-card-footer {
+    padding: 1.15rem 2.5rem;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    box-sizing: border-box;
+}
+
+.as-ainews-footer-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.as-ainews-footer-actions .as-btn {
+    height: 38px;
+    font-size: 0.85rem;
+    padding: 0 1.15rem;
+}
+
+.as-ainews-footer-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 920px) {
+    .as-ainews-card-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .as-ainews-info-col {
+        padding: 1.75rem 1.5rem;
+    }
+
+    .as-ainews-subscribe-col {
+        border-left: none;
+        border-top: 1px solid var(--border);
+        padding: 1.75rem 1.5rem;
+    }
+
+    .as-ainews-card-footer {
+        padding: 1.15rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .as-field-row {
+        flex-direction: column;
+        gap: 0.65rem;
+    }
+
+    .as-field-row .as-btn {
+        width: 100%;
+    }
+
+    .as-ainews-footer-actions {
+        width: 100%;
+    }
+
+    .as-ainews-footer-actions .as-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+}

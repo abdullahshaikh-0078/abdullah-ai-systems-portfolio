@@ -1,18 +1,26 @@
-/* ===== SCROLL REVEAL ===== */
+/* ===== SCROLL REVEAL & MICRO-ANIMATIONS ===== */
 
+/* Content is always visible by default to guarantee instant rendering without JS dependency */
 .as-reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    opacity: 1;
+    transform: none;
 }
 
 /* visible state */
 .as-reveal.as-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
 }
 
 /* optional stagger helper for cards */
 .as-stagger > * {
-    transition-delay: 0.08s;
+    transition-delay: 0.06s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .as-reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
 }

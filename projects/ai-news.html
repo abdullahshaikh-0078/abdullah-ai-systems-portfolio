@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI News Intelligence & Synthesis Platform | Abdullah Shaikh</title>
+    <meta name="description" content="Automated multi-source AI news intelligence engine with Google Gemini embeddings, native PostgreSQL 18 pgvector cosine deduplication, and 6-signal deterministic ranking." />
+    <meta name="author" content="Abdullah Shaikh" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../styles/main.css?v=8" />
+
+    <!-- Immediate Self-Contained Theme Controller -->
+    <script>
+        (function() {
+            var SUN_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+            var MOON_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+            function syncButtons(isLight) {
+                var btns = document.querySelectorAll("#as-theme-toggle, .as-theme-btn");
+                btns.forEach(function(b) {
+                    b.innerHTML = isLight ? MOON_SVG : SUN_SVG;
+                    b.setAttribute("title", isLight ? "Switch to Dark Mode" : "Switch to Light Mode");
+                    b.setAttribute("aria-label", isLight ? "Switch to Dark Mode" : "Switch to Light Mode");
+                });
+            }
+
+            function applyTheme(isLight) {
+                var root = document.documentElement;
+                var body = document.body;
+                if (isLight) {
+                    root.classList.add("as-light-theme");
+                    root.setAttribute("data-theme", "light");
+                    if (body) body.classList.add("as-light-theme");
+                    try { localStorage.setItem("as-theme", "light"); } catch(e) {}
+                } else {
+                    root.classList.remove("as-light-theme");
+                    root.setAttribute("data-theme", "dark");
+                    if (body) body.classList.remove("as-light-theme");
+                    try { localStorage.setItem("as-theme", "dark"); } catch(e) {}
+                }
+                syncButtons(isLight);
+            }
+
+            window.applyTheme = applyTheme;
+            window.toggleTheme = function() {
+                var isLight = document.documentElement.classList.contains("as-light-theme") || 
+                              document.documentElement.getAttribute("data-theme") === "light";
+                applyTheme(!isLight);
+            };
+
+            // Immediate execution in head to eliminate theme flash
+            try {
+                var saved = localStorage.getItem("as-theme");
+                var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+                var isLight = saved === "light" || (!saved && !prefersDark && window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches);
+                if (isLight) {
+                    document.documentElement.classList.add("as-light-theme");
+                    document.documentElement.setAttribute("data-theme", "light");
+                } else {
+                    document.documentElement.classList.remove("as-light-theme");
+                    document.documentElement.setAttribute("data-theme", "dark");
+                }
+            } catch(e) {}
+
+            // Re-sync button icons when DOM is ready
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", function() {
+                    var currentIsLight = document.documentElement.classList.contains("as-light-theme") || 
+                                         document.documentElement.getAttribute("data-theme") === "light";
+                    syncButtons(currentIsLight);
+                });
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <!-- Ambient Live AI Background (Frontend Only) -->
+    <div id="as-ambient-bg" class="as-ambient-bg" aria-hidden="true">
+        <canvas id="as-ambient-canvas"></canvas>
+        <div class="as-ambient-grid"></div>
+    </div>
+
+    <!-- ================= NAVBAR ================= -->
+    <header class="as-navbar">
+        <nav class="as-navbar-container">
+            <div class="as-logo">
+                <a href="../index.html" style="color: inherit; text-decoration: none;">Abdullah Shaikh</a>
+            </div>
+
+            <ul class="as-nav-links">
+                <li><a href="../index.html">Portfolio Home</a></li>
+                <li><a href="#as-live-demo">Interactive Demo</a></li>
+                <li><a href="#as-pipeline">Pipeline Architecture</a></li>
+                <li><a href="#as-engineering">Engineering Deep Dive</a></li>
+            </ul>
+
+            <!-- Theme Toggle -->
+            <button type="button" id="as-theme-toggle" class="as-theme-btn" onclick="toggleTheme()" aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            </button>
+        </nav>
+    </header>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <main class="as-container as-news-project-wrap">
+
+        <!-- Flagship Hero -->
+        <section class="as-news-hero as-reveal">
+            <div class="as-live-badge">
+                <span class="as-pulse-dot" id="as-pulse-dot"></span>
+                <span id="as-live-badge-status">CONNECTING TO FASTAPI BACKEND...</span>
+            </div>
+
+            <h1 class="as-news-hero-title">
+                AI News Intelligence &amp; Synthesis Platform
+            </h1>
+
+            <p class="as-news-hero-subtitle">
+                Curating the most important AI news, research breakthroughs, and agent developments daily. Below is the live intelligence feed, followed by the system architecture case study.
+            </p>
+
+            <div class="as-hero-pills">
+                <span class="as-tech-pill highlight">⚡ Python 3.12 / FastAPI</span>
+                <span class="as-tech-pill highlight">🐘 PostgreSQL 18.4</span>
+                <span class="as-tech-pill highlight">📐 Native pgvector 0.8.6</span>
+                <span class="as-tech-pill highlight">✨ Google Gemini AI (1536-dim)</span>
+                <span class="as-tech-pill">🔍 Cosine Deduplication</span>
+                <span class="as-tech-pill">📊 6-Signal Ranking</span>
+                <span class="as-tech-pill">🛡️ Editorial Curation</span>
+                <span class="as-tech-pill">🧪 159/159 Pytest Suite</span>
+            </div>
+        </section>
+
+        <!-- Real-Time Metrics KPI Grid -->
+        
+<section id="as-live-demo" class="as-reveal">
+            <div class="as-feed-header">
+                <div class="as-feed-title-wrap">
+                    <h3>Live System Intelligence Feed</h3>
+                    <p>Direct REST client querying the running FastAPI backend and PostgreSQL database.</p>
+                </div>
+
+                <div class="as-feed-controls">
+                    <div class="as-search-box">
+                        <span class="as-search-icon">🔍</span>
+                        <input type="text" id="as-news-search" class="as-search-input" placeholder="Search stories, topics, keywords..." />
+                    </div>
+
+                    <div style="display:flex;gap:0.25rem;background:var(--as-color-bg-secondary);padding:3px;border-radius:8px;border:1px solid var(--as-color-border);">
+                        <button id="as-view-curated-btn" class="as-tab-btn active">Curated Stories</button>
+                        <button id="as-view-raw-btn" class="as-tab-btn">Raw Stream (1,348)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Curated Stories View -->
+            <div id="as-curated-feed-section">
+                <!-- Topic & Type Filter Pills -->
+                <div class="as-filter-tabs" id="as-filter-tabs">
+                    <button class="as-tab-btn active" data-topic="ALL">All Stories</button>
+                    <button class="as-tab-btn" data-topic="Artificial Intelligence">Artificial Intelligence</button>
+                    <button class="as-tab-btn" data-topic="AI Agents">AI Agents</button>
+                    <button class="as-tab-btn" data-topic="Technology">Technology</button>
+                    <button class="as-tab-btn" data-type="ARTICLE">Articles Only</button>
+                    <button class="as-tab-btn" data-type="COMMUNITY_POST">Community Discussions</button>
+                </div>
+
+                <!-- Story Cards Grid -->
+                <div class="as-stories-grid" id="as-stories-grid">
+                    <!-- Dynamic story cards rendered by ai-news-project.js -->
+                </div>
+            </div>
+
+            <!-- Raw Ingested Stream View -->
+            <div id="as-raw-stream-section" style="display: none;">
+                <div class="as-raw-table-wrap">
+                    <table class="as-raw-table">
+                        <thead>
+                            <tr>
+                                <th>Title &amp; Canonical URL</th>
+                                <th>Source</th>
+                                <th>Format</th>
+                                <th>Published</th>
+                                <th>AI Relevance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="as-raw-tbody">
+                            <!-- Injected by controller -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;">
+                    <div id="as-raw-page-info" style="font-size:0.85rem;color:var(--as-color-text-secondary);">Page 1 of 1</div>
+                    <div style="display:flex;gap:0.5rem;">
+                        <button id="as-raw-prev" class="as-tab-btn" disabled>&larr; Previous</button>
+                        <button id="as-raw-next" class="as-tab-btn">Next &rarr;</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Deep Dive & Architecture Decisions -->
+        
+
+        <!-- ================= SYSTEM ARCHITECTURE CASE STUDY ================= -->
+        <div class="as-case-study-header as-reveal" style="text-align: center; margin: 5rem auto 2.5rem; max-width: 720px; padding-top: 3rem; border-top: 1px solid var(--as-color-border);">
+            <span class="as-engineer-tag" style="background: rgba(76, 201, 240, 0.08); border: 1px solid rgba(76, 201, 240, 0.2); padding: 0.35rem 0.85rem; border-radius: 9999px;">SYSTEM ARCHITECTURE &amp; CASE STUDY</span>
+            <h2 style="font-size: 2rem; font-weight: 800; color: var(--as-color-text-primary); margin: 0.75rem 0 0.5rem 0;">Production Engineering Deep Dive</h2>
+            <p style="font-size: 0.95rem; color: var(--as-color-text-secondary); line-height: 1.6;">
+                How the autonomous intelligence engine ingests from heterogeneous sources, generates on-demand 1536-dim Gemini embeddings, deduplicates in PostgreSQL 18 pgvector, and deterministically ranks news.
+            </p>
+        </div>
+
+<section class="as-kpi-grid as-reveal">
+            <div class="as-kpi-card">
+                <div class="as-kpi-label">
+                    <span>Total Ingested Content</span>
+                    <span>📦</span>
+                </div>
+                <div class="as-kpi-val" id="as-kpi-items">1,348</div>
+                <div class="as-kpi-subtext" id="as-kpi-items-sub">1,293 Articles • 26 Papers • 29 Posts</div>
+            </div>
+
+            <div class="as-kpi-card">
+                <div class="as-kpi-label">
+                    <span>Synthesized Stories</span>
+                    <span>📑</span>
+                </div>
+                <div class="as-kpi-val" id="as-kpi-stories">4</div>
+                <div class="as-kpi-subtext">Multi-source clustered developments</div>
+            </div>
+
+            <div class="as-kpi-card">
+                <div class="as-kpi-label">
+                    <span>Active Feed Sources</span>
+                    <span>📡</span>
+                </div>
+                <div class="as-kpi-val" id="as-kpi-sources">8</div>
+                <div class="as-kpi-subtext">arXiv, Hacker News, OpenAI, TechCrunch...</div>
+            </div>
+
+            <div class="as-kpi-card">
+                <div class="as-kpi-label">
+                    <span>Vector Embedding Space</span>
+                    <span>🔮</span>
+                </div>
+                <div class="as-kpi-val" id="as-kpi-dim">1536-dim</div>
+                <div class="as-kpi-subtext">Gemini embeddings in native pgvector</div>
+            </div>
+        </section>
+
+        <!-- Interactive Pipeline Architecture -->
+        
+<section id="as-pipeline" class="as-pipeline-card as-reveal">
+            <h2 class="as-pipeline-title">End-to-End System Pipeline</h2>
+            <p class="as-pipeline-desc">
+                From heterogeneous streaming ingestion to vector-space deduplication, clustering, and editorial curation. Click any stage below to inspect its operational mechanics and engineering specifications.
+            </p>
+
+            <div class="as-pipeline-flow">
+                <div class="as-pipeline-step active" data-step="1">
+                    <div class="as-step-num">STAGE 01</div>
+                    <div class="as-step-name">Multi-Source Ingestion</div>
+                    <div class="as-step-detail">arXiv, HN, RSS, YouTube</div>
+                </div>
+
+                <div class="as-pipeline-step" data-step="2">
+                    <div class="as-step-num">STAGE 02</div>
+                    <div class="as-step-name">AI Enrichment</div>
+                    <div class="as-step-detail">Gemini 1536d Vectors</div>
+                </div>
+
+                <div class="as-pipeline-step" data-step="3">
+                    <div class="as-step-num">STAGE 03</div>
+                    <div class="as-step-name">pgvector Dedup</div>
+                    <div class="as-step-detail">Cosine Distance &lt;=&gt;</div>
+                </div>
+
+                <div class="as-pipeline-step" data-step="4">
+                    <div class="as-step-num">STAGE 04</div>
+                    <div class="as-step-name">Story Clustering</div>
+                    <div class="as-step-detail">Multi-Source Synthesis</div>
+                </div>
+
+                <div class="as-pipeline-step" data-step="5">
+                    <div class="as-step-num">STAGE 05</div>
+                    <div class="as-step-name">6-Signal Ranking</div>
+                    <div class="as-step-detail">Deterministic Scoring</div>
+                </div>
+
+                <div class="as-pipeline-step" data-step="6">
+                    <div class="as-step-num">STAGE 06</div>
+                    <div class="as-step-name">Editorial Curation</div>
+                    <div class="as-step-detail">Diversity Feeds &amp; API</div>
+                </div>
+            </div>
+
+            <div class="as-pipeline-inspector" id="as-pipeline-inspector">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+                    <strong style="color:var(--as-color-accent);font-size:1rem;">Stage 1: Multi-Source Heterogeneous Ingestion</strong>
+                    <span style="font-size:0.75rem;color:var(--as-color-text-secondary);">Feedparser • ArXiv API • Hacker News Firebase REST • YouTube v3 API</span>
+                </div>
+                <p style="color:var(--as-color-text-primary);margin:0;font-size:0.875rem;">
+                    Continuous ingestion engine periodically sweeps 8 configured sources across official research repositories, community discussions, and top-tier tech journalism. Raw payloads are normalized into uniform ContentItem records with canonical URLs, deduplication hashes, and structured metadata.
+                </p>
+            </div>
+        </section>
+
+        <!-- Interactive Live Demo & Stream Explorer -->
+        
+<section id="as-engineering" class="as-section as-reveal" style="margin-top: var(--as-space-lg);">
+            <h2 class="as-section-title">Engineering Highlights &amp; Architectural Decisions</h2>
+
+            <div class="as-systems-grid" style="margin-top: 1.5rem;">
+                <div class="as-system-card">
+                    <div class="as-system-icon">🐘</div>
+                    <h3 class="as-system-title">Native pgvector 0.8.6 on PostgreSQL 18</h3>
+                    <p class="as-system-description">
+                        Compiled official pgvector C extension against PostgreSQL 18 MSVC headers. Enables zero-overhead in-database vector similarity calculations using the cosine distance operator (<code>&lt;=&gt;</code>) directly combined with relational joins and ACID guarantees.
+                    </p>
+                    <div class="as-system-tags">
+                        <span class="as-system-tag">PostgreSQL 18</span>
+                        <span class="as-system-tag">pgvector C-Extension</span>
+                        <span class="as-system-tag">Zero Latency</span>
+                    </div>
+                </div>
+
+                <div class="as-system-card">
+                    <div class="as-system-icon">✨</div>
+                    <h3 class="as-system-title">Google Gemini AI Embeddings &amp; Synthesis</h3>
+                    <p class="as-system-description">
+                        Vendor-agnostic provider abstraction generating 1536-dimensional semantic representations via Google Gemini. Grounded story synthesis preserves every original content item while generating factual summaries and actionable takeaways.
+                    </p>
+                    <div class="as-system-tags">
+                        <span class="as-system-tag">1536 Dimensions</span>
+                        <span class="as-system-tag">Gemini Flash</span>
+                        <span class="as-system-tag">Provider Abstraction</span>
+                    </div>
+                </div>
+
+                <div class="as-system-card">
+                    <div class="as-system-icon">📊</div>
+                    <h3 class="as-system-title">Transparent 6-Signal Deterministic Ranking</h3>
+                    <p class="as-system-description">
+                        Replaces black-box recommendation algorithms with an objective, fully auditable 6-signal scoring model: Recency (25%), Relevance (25%), Authority (20%), Coverage (15%), Engagement (10%), and Format Diversity (5%).
+                    </p>
+                    <div class="as-system-tags">
+                        <span class="as-system-tag">Auditability</span>
+                        <span class="as-system-tag">Exponential Decay</span>
+                        <span class="as-system-tag">Corroboration</span>
+                    </div>
+                </div>
+
+                <div class="as-system-card">
+                    <div class="as-system-icon">🛡️</div>
+                    <h3 class="as-system-title">Diversity-Enforced Editorial Curation</h3>
+                    <p class="as-system-description">
+                        Configurable diversity caps prevent news feeds from being monopolized by a single corporate publisher or topic. Enforces maximum items per topic and per source to guarantee broad, balanced technical coverage.
+                    </p>
+                    <div class="as-system-tags">
+                        <span class="as-system-tag">Editorial Guardrails</span>
+                        <span class="as-system-tag">Source Diversity</span>
+                        <span class="as-system-tag">Balanced Feeds</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Transparent Ranking Breakdown Modal -->
+    <div class="as-modal-backdrop" id="as-ranking-modal">
+        <div class="as-modal-content">
+            <button class="as-modal-close" id="as-modal-close">&times;</button>
+            <h3 class="as-modal-title" id="as-modal-story-title">Ranking Breakdown</h3>
+            <p class="as-modal-subtitle">
+                Transparent multi-signal mathematical breakdown evaluated by the ranking engine.
+            </p>
+            <div id="as-ranking-modal-body">
+                <!-- Injected by ai-news-project.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="as-footer">
+        <div class="as-container">
+            <p>&copy; 2026 Abdullah Shaikh. AI Systems Engineering Portfolio.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="../scripts/main.js"></script>
+    <script type="module" src="../scripts/systems/ai-news-project.js"></script>
+</body>
+</html>

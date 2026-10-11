@@ -2,159 +2,1757 @@
 <html lang="en">
 
 <head>
-    <!-- Meta -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abdullah Mukhtar Shaikh | AI Engineer | LLMs, Agents &amp; RAG</title>
+    <meta name="description"
+        content="Portfolio of Abdullah Mukhtar Shaikh, AI Engineer specializing in Production RAG, Autonomous Agents, Scalable Backend Systems, and FastAPI." />
+    <meta name="keywords"
+        content="AI Engineer, Generative AI, RAG, Autonomous Agents, FastMCP, FastAPI, Vector Search, pgvector, Qdrant, Machine Learning, Hyderabad" />
+    <meta name="author" content="Abdullah Mukhtar Shaikh" />
 
-    <!-- SEO -->
-    <title>Abdullah Shaikh | AI Systems Engineer</title>
-    <meta name="description" content="AI Systems Engineering Portfolio — End-to-End Machine Learning, Production Systems, and Research." />
-    <meta name="author" content="Abdullah Shaikh" />
+    <!-- Open Graph / Meta -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Abdullah Mukhtar Shaikh | AI Engineer" />
+    <meta property="og:description"
+        content="AI Engineer specializing in Production RAG, Autonomous Agents, and Scalable Backend Systems." />
 
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles/main.css" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Abdullah Mukhtar Shaikh | AI Engineer" />
+    <meta name="twitter:description"
+        content="AI Engineer specializing in Production RAG, Autonomous Agents, and Scalable Backend Systems." />
 
-    <!-- Favicon (optional later) -->
+    <!-- Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="styles/main.css?v=9" />
+
+    <!-- Core Libraries -->
+    <script src="scripts/core/gsap.min.js"></script>
+    <script src="scripts/core/ScrollTrigger.min.js"></script>
+
+    <!-- Immediate Self-Contained Theme Controller & Modal Bridge -->
+    <script>
+        (function () {
+            var SUN_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+            var MOON_SVG = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+
+            function syncButtons(isLight) {
+                var btns = document.querySelectorAll("#as-theme-toggle, .as-theme-btn");
+                btns.forEach(function (b) {
+                    b.innerHTML = isLight ? MOON_SVG : SUN_SVG;
+                    b.setAttribute("title", isLight ? "Switch to Dark Mode" : "Switch to Light Mode");
+                    b.setAttribute("aria-label", isLight ? "Switch to Dark Mode" : "Switch to Light Mode");
+                });
+            }
+
+            function applyTheme(isLight) {
+                var root = document.documentElement;
+                var body = document.body;
+                if (isLight) {
+                    root.classList.add("as-light-theme");
+                    root.setAttribute("data-theme", "light");
+                    if (body) body.classList.add("as-light-theme");
+                    try { localStorage.setItem("as-theme", "light"); } catch (e) { }
+                } else {
+                    root.classList.remove("as-light-theme");
+                    root.setAttribute("data-theme", "dark");
+                    if (body) body.classList.remove("as-light-theme");
+                    try { localStorage.setItem("as-theme", "dark"); } catch (e) { }
+                }
+                syncButtons(isLight);
+            }
+
+            window.applyTheme = applyTheme;
+            window.toggleTheme = function () {
+                var isLight = document.documentElement.classList.contains("as-light-theme") ||
+                    document.documentElement.getAttribute("data-theme") === "light";
+                applyTheme(!isLight);
+            };
+
+            window.openArchModal = function (key) {
+                document.documentElement.style.overflow = "hidden";
+                document.body.style.overflow = "hidden";
+                if (!window.__projectModalController && window.ProjectModalController) {
+                    new window.ProjectModalController();
+                }
+                if (window.__projectModalController) {
+                    window.__projectModalController.openModal(key);
+                }
+            };
+
+            window.closeArchModal = function () {
+                document.documentElement.style.overflow = "";
+                document.body.style.overflow = "";
+                if (window.__projectModalController) {
+                    window.__projectModalController.closeModal();
+                }
+            };
+
+            window.openResumeModal = function () {
+                var modal = document.getElementById("as-resume-modal");
+                var iframe = document.getElementById("as-resume-iframe");
+                if (!modal) return;
+                if (iframe && (!iframe.src || iframe.src === "" || iframe.src === window.location.href)) {
+                    iframe.src = "assets/Abdullah_Mukhtar_Shaikh_Resume.pdf";
+                }
+                modal.classList.add("open");
+                modal.setAttribute("aria-hidden", "false");
+                document.body.style.overflow = "hidden";
+            };
+
+            window.closeResumeModal = function () {
+                var modal = document.getElementById("as-resume-modal");
+                if (!modal) return;
+                modal.classList.remove("open");
+                modal.setAttribute("aria-hidden", "true");
+                document.body.style.overflow = "";
+            };
+
+            document.addEventListener("DOMContentLoaded", function () {
+                var modal = document.getElementById("as-resume-modal");
+                if (modal) {
+                    modal.addEventListener("click", function (e) {
+                        if (e.target === modal) window.closeResumeModal();
+                    });
+                }
+                document.addEventListener("keydown", function (e) {
+                    if (e.key === "Escape") window.closeResumeModal();
+                });
+            });
+
+            // Immediate execution in head to eliminate theme flash / FOUC
+            try {
+                var urlTheme = new URLSearchParams(window.location.search).get("theme");
+                var saved = urlTheme || localStorage.getItem("as-theme");
+                var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+                var isLight = saved === "light" || (!saved && !prefersDark && window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches);
+                if (isLight) {
+                    document.documentElement.classList.add("as-light-theme");
+                    document.documentElement.setAttribute("data-theme", "light");
+                } else {
+                    document.documentElement.classList.remove("as-light-theme");
+                    document.documentElement.setAttribute("data-theme", "dark");
+                }
+            } catch (e) { }
+
+            // Re-sync button icons as soon as DOM is ready
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", function () {
+                    var currentIsLight = document.documentElement.classList.contains("as-light-theme") ||
+                        document.documentElement.getAttribute("data-theme") === "light";
+                    syncButtons(currentIsLight);
+                });
+            }
+
+            // Support URL-based instant scroll targeting for verification and deep links
+            try {
+                var scrollTarget = new URLSearchParams(window.location.search).get("scrollTo");
+                if (scrollTarget) {
+                    window.addEventListener("load", function () {
+                        var el = document.getElementById(scrollTarget);
+                        if (el) {
+                            setTimeout(function () {
+                                el.scrollIntoView({ behavior: "instant", block: "start" });
+                            }, 50);
+                        }
+                    });
+                }
+            } catch (e) { }
+
+            // Support URL-based modal opening & scrolling for verification and direct links
+            try {
+                var modalParam = new URLSearchParams(window.location.search).get("modal");
+                if (modalParam === "resume") {
+                    window.addEventListener("load", function () {
+                        setTimeout(function () {
+                            if (window.openResumeModal) window.openResumeModal();
+                            var scrollModal = new URLSearchParams(window.location.search).get("scrollModal");
+                            if (scrollModal) {
+                                setTimeout(function () {
+                                    var body = document.querySelector(".as-resume-modal-body");
+                                    if (body) {
+                                        if (scrollModal === "bottom") {
+                                            body.scrollTop = body.scrollHeight;
+                                        } else {
+                                            body.scrollTop = parseInt(scrollModal, 10);
+                                        }
+                                    }
+                                }, 300);
+                            }
+                        }, 120);
+                    });
+                }
+
+                var archModalParam = new URLSearchParams(window.location.search).get("archModal");
+                if (archModalParam) {
+                    window.addEventListener("load", function () {
+                        setTimeout(function () {
+                            if (window.openArchModal) window.openArchModal(archModalParam);
+                            var scrollModal = new URLSearchParams(window.location.search).get("scrollModal");
+                            if (scrollModal) {
+                                setTimeout(function () {
+                                    var box = document.querySelector(".as-arch-modal-box");
+                                    if (box) {
+                                        if (scrollModal === "bottom") {
+                                            box.scrollTop = box.scrollHeight;
+                                        } else {
+                                            box.scrollTop = parseInt(scrollModal, 10);
+                                        }
+                                    }
+                                }, 300);
+                            }
+                        }, 120);
+                    });
+                }
+            } catch (e) { }
+        })();
+    </script>
 </head>
 
 <body>
 
-    <!-- ================= NAVIGATION ================= -->
-    <header class="as-navbar">
-        <nav class="as-navbar-container">
-
-    <div class="as-logo">
-        Abdullah Shaikh
+    <!-- ================= AMBIENT AI LIVE BACKGROUND (FRONTEND ONLY) ================= -->
+    <div id="as-ambient-bg" class="as-ambient-bg" aria-hidden="true">
+        <canvas id="as-ambient-canvas"></canvas>
+        <div class="as-ambient-grid"></div>
     </div>
 
-    <ul class="as-nav-links">
-        <li><a href="#as-hero">Home</a></li>
-        <li><a href="#as-systems-overview">Systems</a></li>
-        <li><a href="#as-research-lab">Research</a></li>
-        <li><a href="#as-writing">Writing</a></li>
-        <li><a href="#as-contact">Contact</a></li>
-    </ul>
 
-    <!-- Theme Toggle -->
-    <label class="as-theme-switch">
-        <input type="checkbox" id="as-theme-toggle">
-        <span class="as-theme-slider"></span>
-    </label>
 
-</nav>
+    <!-- ================= 1. STICKY NAVBAR ================= -->
+    <header class="as-navbar">
+        <nav class="as-navbar-container" aria-label="Main Navigation">
+            <!-- Left: Brand Lockup -->
+            <a href="#hero" class="as-navbar-brand">
+                <span class="as-brand-name">Abdullah Mukhtar Shaikh</span>
+                <span class="as-brand-role">AI Engineer</span>
+            </a>
+
+            <!-- Center Navigation Links -->
+            <ul class="as-nav-links" id="as-nav-menu">
+                <li>
+                    <a href="#ai-news" class="as-nav-live-pill" title="Jump to AI News Live System Demo">
+                        <span class="as-status-dot"></span>
+                        <span>AI News Live Demo</span>
+                    </a>
+                </li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <!-- Right Actions: Status Badge, Resume CTA & Compact Theme Toggle -->
+            <div class="as-navbar-actions">
+                <div class="as-status-indicator" title="Available for AI Engineering opportunities">
+                    <span class="as-status-dot"></span>
+                    <span class="as-status-text">Available for AI Engineering Roles</span>
+                </div>
+
+                <button type="button" class="as-nav-resume-btn" onclick="openResumeModal()" title="View Resume">
+                    View Resume
+                </button>
+
+                <!-- Compact Theme Toggle Button (Sun/Moon Icon) -->
+                <button type="button" class="as-theme-btn" id="as-theme-toggle" onclick="toggleTheme()"
+                    aria-label="Toggle Dark/Light Mode" title="Toggle Theme">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+
+                <!-- Mobile Hamburger Toggle -->
+                <button type="button" class="as-mobile-toggle" id="as-mobile-toggle" aria-label="Open Navigation Menu"
+                    aria-expanded="false">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </nav>
     </header>
 
 
-    <!-- ================= HERO SECTION ================= -->
-    <section id="as-hero" class="as-section as-hero as-reveal">
+    <!-- ================= 2. PREMIUM EDITORIAL WORKSPACE HERO ================= -->
+    <section id="hero" class="as-hero">
+        <div class="as-hero-container">
+            <!-- Left Column: Editorial Introduction & Primary Actions -->
+            <div class="as-hero-left">
+                <div class="as-hero-eyebrow">
+                    <span class="as-eyebrow-pulse"></span>
+                    <span>AI ENGINEER | GENERATIVE AI SYSTEMS</span>
+                </div>
 
-    <!-- Animated background -->
-    <canvas id="as-hero-canvas"></canvas>
+                <div class="as-hero-name">ABDULLAH MUKHTAR SHAIKH</div>
 
-    <div class="as-container as-hero-content">
+                <h1 class="as-hero-heading">
+                    AI Engineer building intelligent, production-ready AI systems.
+                </h1>
 
-        <h1 class="as-hero-title">
-            AI Systems Engineering Portfolio
-        </h1>
+                <p class="as-hero-subheading">
+                    I build practical AI applications spanning RAG systems, LLM-powered workflows, autonomous agents, and cloud automation.
+                </p>
 
-        <p class="as-hero-subtitle">
-            Designing large-scale intelligent systems — from data pipelines to production deployment.
-        </p>
+                <!-- Hero Action Buttons -->
+                <div class="as-hero-actions">
+                    <a href="#projects" class="as-btn as-btn-primary">
+                        <span>Explore My Work</span>
+                    </a>
+                    <button type="button" onclick="openResumeModal()" class="as-btn as-btn-secondary" title="View Resume">
+                        <span>View Resume</span>
+                    </button>
+                </div>
 
-        <div class="as-hero-actions">
-            <button class="as-btn-primary">Explore Systems</button>
-            <button class="as-btn-secondary">Download Resume</button>
-        </div>
-
-    </div>
-
-</section>
-
-
-    <!-- ================= SYSTEMS OVERVIEW ================= -->
-    <section id="as-systems-overview" class="as-section as-reveal">
-    <div class="as-container">
-
-        <h2 class="as-section-title">Flagship Systems</h2>
-
-        <div class="as-systems-grid as-stagger" id="as-systems-grid"></div>
-
-    </div>
-</section>
-
-
-    <!-- ================= SYSTEM DETAIL PLACEHOLDER ================= -->
-    <section id="as-system-detail" class="as-section as-reveal">
-        <div class="as-container">
-            <h2 class="as-section-title">System Deep Dive</h2>
-
-            <div id="as-system-content">
-                <!-- Dynamic content injected here -->
+                <!-- Subtle Links to GitHub & LinkedIn -->
+                <div class="as-hero-socials">
+                    <a href="https://github.com/abdullahshaikh-0078" target="_blank" rel="noopener noreferrer"
+                        class="as-social-link" title="GitHub Profile">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                        </svg>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="as-social-link"
+                        title="LinkedIn Profile">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                            <path
+                                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.46 1.46 0 1 0 0-2.92 1.46 1.46 0 0 0 0 2.92M7.86 18.5V10.13H5.07V18.5h2.79z" />
+                        </svg>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
 
-    <!-- ================= RESEARCH LAB ================= -->
-    <section id="as-research-lab" class="as-section as-reveal">
-        <div class="as-container">
-            <h2 class="as-section-title">Research & Experimentation Lab</h2>
+    <!-- ================= 3. AI NEWS SHOWCASE (FRONTEND PRESENTATION) ================= -->
+    <section id="ai-news" class="as-flagship-section">
+        <div class="as-container-wide as-flagship-container">
 
-            <div id="as-experiment-dashboard">
-                <!-- Experiment visualizations -->
+            <div class="as-flagship-badge-header">
+                <div class="as-flagship-status-pill">
+                    <span class="as-status-dot"></span>
+                    <span>AUTONOMOUS AI NEWS SYSTEM</span>
+                </div>
+                <h2 class="as-flagship-title">AI News Intelligence &amp; Newsletter</h2>
+                <p class="as-flagship-tagline">
+                    Production intelligence pipeline for discovering, processing, deduplicating, ranking, and
+                    synthesizing AI news.
+                </p>
+            </div>
+
+            <!-- Main News Product Card (Wide, Content-Driven 2-Column Product Showcase) -->
+            <div class="as-ainews-product-card">
+                <div class="as-ainews-card-grid">
+                    <!-- Left Column: Daily AI Digest & Small Pipeline -->
+                    <div class="as-ainews-info-col">
+                        <div>
+                            <div class="as-ainews-badge">Daily AI Digest</div>
+                            <h3 class="as-ainews-headline">Autonomous Intelligence &amp; Synthesis</h3>
+                            <p class="as-ainews-subtext">
+                                Curated AI research, model releases, agent systems, and high-signal industry updates.
+                            </p>
+                        </div>
+
+                        <!-- Small Technical Pipeline Visualization -->
+                        <div class="as-ainews-pipeline-box" aria-label="AI News Processing Pipeline">
+                            <div class="as-ainews-pipe-step">
+                                <span class="as-ainews-pipe-node">Discover</span>
+                                <span class="as-ainews-pipe-arrow">&darr;</span>
+                            </div>
+                            <div class="as-ainews-pipe-step">
+                                <span class="as-ainews-pipe-node">Process</span>
+                                <span class="as-ainews-pipe-arrow">&darr;</span>
+                            </div>
+                            <div class="as-ainews-pipe-step">
+                                <span class="as-ainews-pipe-node">Deduplicate</span>
+                                <span class="as-ainews-pipe-arrow">&darr;</span>
+                            </div>
+                            <div class="as-ainews-pipe-step">
+                                <span class="as-ainews-pipe-node">Rank</span>
+                                <span class="as-ainews-pipe-arrow">&darr;</span>
+                            </div>
+                            <div class="as-ainews-pipe-step">
+                                <span class="as-ainews-pipe-node">Synthesize</span>
+                                <span class="as-ainews-pipe-arrow">&darr;</span>
+                            </div>
+                            <div class="as-ainews-pipe-step">
+                                <span class="as-ainews-pipe-node as-pipe-final">Deliver</span>
+                            </div>
+                        </div>
+
+                        <p class="as-ainews-pipeline-caption">
+                            Every article passes through continuous discovery, semantic deduplication, and deterministic ranking before synthesis.
+                        </p>
+                    </div>
+
+                    <!-- Right Column: Newsletter Subscription Card -->
+                    <div class="as-ainews-subscribe-col">
+                        <div class="as-subscribe-box">
+                            <h4 class="as-subscribe-title">Get the AI Digest</h4>
+                            <p class="as-subscribe-desc">
+                                Choose when and how you want your AI news delivered.
+                            </p>
+
+                            <!-- Subscription Form -->
+                            <form id="as-newsletter-form" class="as-native-newsletter-form" novalidate>
+                                <div class="as-field-group">
+                                    <label for="as-newsletter-email" class="as-field-label">Email address</label>
+                                    <div class="as-field-row">
+                                        <input 
+                                            type="email" 
+                                            id="as-newsletter-email" 
+                                            class="as-native-input" 
+                                            placeholder="you@example.com" 
+                                            required 
+                                            autocomplete="email"
+                                        />
+                                        <button type="submit" id="as-newsletter-submit-btn" class="as-btn as-btn-primary">
+                                            <span class="as-btn-text">Subscribe</span>
+                                            <span class="as-btn-spinner" style="display:none;"></span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Customize Preferences Secondary Action -->
+                                <div class="as-customize-row">
+                                    <button 
+                                        type="button" 
+                                        id="as-customization-toggle-btn" 
+                                        class="as-customize-action-btn"
+                                        aria-haspopup="dialog"
+                                    >
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="4" y1="21" x2="4" y2="14"></line>
+                                            <line x1="4" y1="10" x2="4" y2="3"></line>
+                                            <line x1="12" y1="21" x2="12" y2="12"></line>
+                                            <line x1="12" y1="8" x2="12" y2="3"></line>
+                                            <line x1="20" y1="21" x2="20" y2="16"></line>
+                                            <line x1="20" y1="12" x2="20" y2="3"></line>
+                                            <line x1="1" y1="14" x2="7" y2="14"></line>
+                                            <line x1="9" y1="8" x2="15" y2="8"></line>
+                                            <line x1="17" y1="16" x2="23" y2="16"></line>
+                                        </svg>
+                                        <span>Customize preferences</span>
+                                    </button>
+                                </div>
+
+                                <!-- Inline Feedback Message -->
+                                <div id="as-newsletter-feedback" class="as-newsletter-feedback" style="display:none;" role="status"></div>
+
+                                <!-- Compact Microcopy -->
+                                <div class="as-newsletter-microcopy">
+                                    <span>Daily or weekly delivery</span>
+                                    <span class="as-micro-bullet">&bull;</span>
+                                    <span>Curated AI stories</span>
+                                    <span class="as-micro-bullet">&bull;</span>
+                                    <span>No unnecessary noise</span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Intentional Project Actions Footer Row -->
+                <div class="as-ainews-card-footer">
+                    <div class="as-ainews-footer-actions">
+                        <a href="https://github.com/abdullahshaikh-0078" target="_blank" rel="noopener noreferrer" class="as-btn as-btn-secondary">
+                            GitHub Repository
+                        </a>
+                    </div>
+                    <div class="as-ainews-footer-meta">
+                        <span>Autonomous Pipeline &bull; Daily Synthesis</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ================= 4. FEATURED AI PROJECTS (VISUAL SHOWCASES & ARCHITECTURE) ================= -->
+    <section id="projects" class="as-projects-section">
+        <div class="as-container-wide">
+
+            <div class="as-section-header-left">
+                <div class="as-section-eyebrow">
+                    <span>FLAGSHIP SYSTEMS</span>
+                </div>
+                <h2 class="as-section-title">Production AI Systems &amp; Autonomous Agents</h2>
+                <p class="as-section-desc">
+                    Real, working systems built from the ground up: verified multi-document RAG pipelines, autonomous cloud infrastructure agents, voice-driven MCP platforms, and automated intelligence engines.
+                </p>
+            </div>
+
+            <!-- Vertical Stack: 4 High-Impact Visual Showcases -->
+            <div class="as-projects-list">
+
+                <!-- ================= 01: NEXUS RAG ================= -->
+                <article class="as-project-card-interactive" id="project-nexus-rag">
+
+                    <!-- 2. Header & Tags -->
+                    <div class="as-interactive-header">
+                        <div class="as-interactive-title-block">
+                            <div class="as-interactive-meta-pills">
+                                <span class="as-interactive-eyebrow">01 • ENTERPRISE DOCUMENT INTELLIGENCE</span>
+                                <span class="as-interactive-pill-success">85.71% RECALL@10</span>
+                                <span class="as-interactive-pill-accent">0.7738 MRR@10</span>
+                                <span class="as-interactive-pill-success">100% MATH ACCURACY</span>
+                            </div>
+                            <h3 class="as-interactive-title">NEXUS RAG</h3>
+                            <div class="as-interactive-subtitle">
+                                Enterprise All-Rounder Document Search &amp; Verification Platform with Table Preservation &amp; Zero Math Hallucinations
+                            </div>
+                            <div class="as-project-tech-tags">
+                                <span class="as-tag as-tag-accent">Python</span>
+                                <span class="as-tag as-tag-accent">FastAPI</span>
+                                <span class="as-tag">Qdrant HNSW</span>
+                                <span class="as-tag">BM25 Okapi</span>
+                                <span class="as-tag">Sentence-Transformers</span>
+                                <span class="as-tag">Google Gemini Pro</span>
+                                <span class="as-tag">Python Math Sandbox</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Two-Column Case Study: Problem & Results + Real System Visual -->
+                    <div class="as-case-study-grid">
+                        <div class="as-case-study-content">
+                            <!-- 3. Plain English Explanation (Recruiter View) -->
+                            <div class="as-plain-summary">
+                                <strong>What It Does:</strong> Companies have thousands of pages of messy financial reports, PDFs, and corporate spreadsheets. Standard AI search tools miss exact numbers and hallucinate fake math when calculating percentages. <strong>NEXUS RAG</strong> instantly reads across thousands of pages, keeps multi-column balance sheet tables intact without cutting rows in half, and calculates formulas using a real Python calculator—guaranteeing 100% accurate mathematical answers with verified page citations.
+                            </div>
+
+                            <!-- 4. At-a-Glance Visual Evolution Roadmap (v1 -> v2 -> v3 -> v4) -->
+                            <div class="as-evolution-roadmap">
+                                <div class="as-evolution-roadmap-header">
+                                    <span class="as-evolution-roadmap-title">
+                                        <span>🔬</span>
+                                        <span>Engineering Evolution &amp; Measured Breakthroughs</span>
+                                    </span>
+                                    <span>How each version solved the previous version's failure</span>
+                                </div>
+
+                                <div class="as-evolution-grid-4">
+                                    <!-- v1 -->
+                                    <div class="as-evolution-card">
+                                        <div class="as-evolution-card-top">
+                                            <span class="as-evolution-version">VERSION 01</span>
+                                            <span class="as-evolution-status failed">Failed</span>
+                                        </div>
+                                        <div class="as-evolution-title">Basic Semantic Search</div>
+                                        <div class="as-evolution-metric bad">Exact Recall: 0.0%</div>
+                                        <p class="as-evolution-desc">
+                                            Standard AI vectors look for general meaning, but completely lose exact numbers and fiscal years.
+                                        </p>
+                                    </div>
+
+                                    <!-- v2 -->
+                                    <div class="as-evolution-card">
+                                        <div class="as-evolution-card-top">
+                                            <span class="as-evolution-version">VERSION 02</span>
+                                            <span class="as-evolution-status failed">Failed</span>
+                                        </div>
+                                        <div class="as-evolution-title">Keyword Search (BM25)</div>
+                                        <div class="as-evolution-metric med">Synonym Recall: 14.1%</div>
+                                        <p class="as-evolution-desc">
+                                            Finds exact letters and tickers, but fails on semantic synonym terms.
+                                        </p>
+                                    </div>
+
+                                    <!-- v3 -->
+                                    <div class="as-evolution-card">
+                                        <div class="as-evolution-card-top">
+                                            <span class="as-evolution-version">VERSION 03</span>
+                                            <span class="as-evolution-status partial">Breakthrough</span>
+                                        </div>
+                                        <div class="as-evolution-title">Hybrid Search (RRF)</div>
+                                        <div class="as-evolution-metric good">Hybrid Recall: 71.4%</div>
+                                        <p class="as-evolution-desc">
+                                            Merged both search methods. High recall, but complex balance sheets still lost table context.
+                                        </p>
+                                    </div>
+
+                                    <!-- v4 -->
+                                    <div class="as-evolution-card success-card">
+                                        <div class="as-evolution-card-top">
+                                            <span class="as-evolution-version">VERSION 04</span>
+                                            <span class="as-evolution-status production">Production ★</span>
+                                        </div>
+                                        <div class="as-evolution-title">Table-Aware + Math</div>
+                                        <div class="as-evolution-metric top">85.71% Recall • 100% Math</div>
+                                        <p class="as-evolution-desc">
+                                            Preserves tables intact, routing calculations to an isolated Python sandbox.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 6. Action Buttons & Status -->
+                            <div class="as-interactive-actions">
+                                <div class="as-action-btns-group">
+                                    <button type="button" class="as-btn as-btn-primary" data-arch-target="nexus-rag"
+                                        onclick="openArchModal('nexus-rag')">
+                                        View Architecture Modal &rarr;
+                                    </button>
+                                    <a href="https://github.com/abdullahshaikh-0078" target="_blank" rel="noopener noreferrer"
+                                        class="as-btn as-btn-secondary">
+                                        GitHub
+                                    </a>
+                                </div>
+                                <div class="as-interactive-status-meta">
+                                    <span class="as-live-indicator">SEC 10-K Tested</span>
+                                    <span>•</span>
+                                    <span>MRR@10: 0.7738</span>
+                                    <span>•</span>
+                                    <span>Zero Hallucination Arithmetic</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: System Screenshot / Visual -->
+                        <div class="as-case-study-visual">
+                            <div class="as-case-study-frame">
+                                <img src="assets/images/nexus-rag-ui.webp" alt="NEXUS RAG Production Search UI and Verified Table Extraction" class="as-case-study-img" loading="lazy" />
+                                <div class="as-case-study-caption">
+                                    <span>Production Query &amp; Table Retrieval UI</span>
+                                    <span>Qdrant + BM25 Hybrid</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Expandable Technical Pipeline (For Senior Technical Leads) -->
+                    <details class="as-tech-details">
+                        <summary class="as-tech-summary">
+                            <span>⚙️ Deep Architecture: Inspect the Full 10-Stage Pipeline</span>
+                        </summary>
+                        <div class="as-tech-details-content">
+                            <div class="as-pipeline-section">
+                                <div class="as-pipeline-top-row">
+                                    <div class="as-pipeline-title">
+                                        <span>⚡</span>
+                                        <span id="rag-version-headline">Full 10-Stage Enterprise Execution Pipeline</span>
+                                    </div>
+                                    <span class="as-pipeline-hint">Click any stage node below to inspect Data Inputs &amp; Outputs</span>
+                                </div>
+
+                                <div id="nexus-rag-pipeline-grid" class="as-pipeline-grid">
+                                    <!-- Populated dynamically via project-evolution.js -->
+                                </div>
+
+                                <div class="as-inspector-box">
+                                    <div class="as-inspector-top">
+                                        <div class="as-inspector-title-row">
+                                            <span id="nexus-rag-inspect-num" class="as-inspector-num-badge">STAGE 01</span>
+                                            <span id="nexus-rag-inspect-title" class="as-inspector-title">Document Ingestion</span>
+                                        </div>
+                                        <span id="nexus-rag-inspect-tech" class="as-inspector-tech-badge">PyMuPDF • pdfplumber</span>
+                                    </div>
+                                    <p id="nexus-rag-inspect-desc" class="as-inspector-desc">
+                                        Ingests raw multi-page corporate filings, research papers, and reports. Cleans formatting artifacts and detects page boundaries.
+                                    </p>
+                                    <div class="as-inspector-io-grid">
+                                        <div class="as-inspector-io-item">
+                                            <span class="as-io-label">Input Data</span>
+                                            <span id="nexus-rag-inspect-input" class="as-io-val">Raw unstructured files (PDF, DOCX)</span>
+                                        </div>
+                                        <div class="as-inspector-io-item">
+                                            <span class="as-io-label">Output Data</span>
+                                            <span id="nexus-rag-inspect-output" class="as-io-val output-val">Normalized document streams with layout tags</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                </article>
+
+
+                <!-- ================= 02: FASTCLOUD ================= -->
+                <article class="as-project-card-interactive" id="project-fastcloud">
+
+                    <!-- 2. Header & Tags -->
+                    <div class="as-interactive-header">
+                        <div class="as-interactive-title-block">
+                            <div class="as-interactive-meta-pills">
+                                <span class="as-interactive-eyebrow">02 • MULTI-CLOUD INFRASTRUCTURE AGENT</span>
+                                <span class="as-interactive-pill-accent">AWS &amp; AZURE DUAL-SDK</span>
+                                <span class="as-interactive-pill-success">DEPENDENCY DAG SEQUENCING</span>
+                                <span class="as-interactive-pill-accent">TRANSACTIONAL ROLLBACK</span>
+                            </div>
+                            <h3 class="as-interactive-title">FastCloud</h3>
+                            <div class="as-interactive-subtitle">
+                                AI-Powered Natural Language Cloud Automation Platform with Multi-Cloud DAG Orchestration &amp; Audit Logging
+                            </div>
+                            <div class="as-project-tech-tags">
+                                <span class="as-tag as-tag-accent">Node.js</span>
+                                <span class="as-tag as-tag-accent">Express</span>
+                                <span class="as-tag">MongoDB</span>
+                                <span class="as-tag">AWS SDK v3</span>
+                                <span class="as-tag">Azure SDKs</span>
+                                <span class="as-tag">Google Gemini</span>
+                                <span class="as-tag">Idempotent DAG Engine</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Plain English Explanation (Recruiter View) -->
+                    <div class="as-plain-summary">
+                        <strong>What It Does (In Simple Words):</strong> Setting up cloud infrastructure on Amazon Web Services (AWS) or Microsoft Azure normally requires clicking through dozens of confusing technical screens. <strong>FastCloud</strong> lets developers type what they want in plain English (e.g. <em>"Deploy a secure web server with a PostgreSQL database in Mumbai"</em>). The AI figures out the configuration, validates security rules, deploys the resources in the exact right order, and automatically undoes (rolls back) changes if anything fails.
+                    </div>
+
+                    <!-- 4. Expandable Technical Pipeline (For Senior Technical Leads) -->
+                    <details class="as-tech-details">
+                        <summary class="as-tech-summary">
+                            <span>⚙️ Deep Architecture: Inspect the 8-Stage Cloud Orchestration Pipeline</span>
+                        </summary>
+                        <div class="as-tech-details-content">
+                            <div class="as-pipeline-section">
+                                <div class="as-pipeline-top-row">
+                                    <div class="as-pipeline-title">
+                                        <span>⚡</span>
+                                        <span>8-Stage Autonomous Cloud Orchestration Pipeline</span>
+                                    </div>
+                                    <span class="as-pipeline-hint">Click any stage node below to inspect Data Inputs &amp; Outputs</span>
+                                </div>
+
+                                <div id="fastcloud-pipeline-grid" class="as-pipeline-grid-4col">
+                                    <!-- Populated dynamically -->
+                                </div>
+
+                                <div class="as-inspector-box">
+                                    <div class="as-inspector-top">
+                                        <div class="as-inspector-title-row">
+                                            <span id="fastcloud-inspect-num" class="as-inspector-num-badge">STAGE 01</span>
+                                            <span id="fastcloud-inspect-title" class="as-inspector-title">NL Prompt Ingestion</span>
+                                        </div>
+                                        <span id="fastcloud-inspect-tech" class="as-inspector-tech-badge">Express.js Async Handler</span>
+                                    </div>
+                                    <p id="fastcloud-inspect-desc" class="as-inspector-desc">
+                                        Accepts unstructured conversational deployment instructions from developers via web dashboard or API endpoints.
+                                    </p>
+                                    <div class="as-inspector-io-grid">
+                                        <div class="as-inspector-io-item">
+                                            <span class="as-io-label">Input Data</span>
+                                            <span id="fastcloud-inspect-input" class="as-io-val">Natural language text prompt</span>
+                                        </div>
+                                        <div class="as-inspector-io-item">
+                                            <span class="as-io-label">Output Data</span>
+                                            <span id="fastcloud-inspect-output" class="as-io-val output-val">Sanitized query payload</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- 5. Action Buttons & Status -->
+                    <div class="as-interactive-actions">
+                        <div class="as-action-btns-group">
+                            <button type="button" class="as-btn as-btn-primary" data-arch-target="fastcloud"
+                                onclick="openArchModal('fastcloud')">
+                                View Architecture Modal &rarr;
+                            </button>
+                            <a href="#fastcloud-gallery" class="as-btn as-btn-secondary">
+                                📸 View UI Walkthrough (5 Screens) &darr;
+                            </a>
+                            <a href="https://github.com/abdullahshaikh-0078" target="_blank" rel="noopener noreferrer"
+                                class="as-btn as-btn-secondary">
+                                GitHub
+                            </a>
+                        </div>
+                        <div class="as-interactive-status-meta">
+                            <span class="as-live-indicator">Multi-Cloud Active</span>
+                            <span>•</span>
+                            <span>Validated DAG Sequencing</span>
+                            <span>•</span>
+                            <span>Audit Logging in MongoDB</span>
+                        </div>
+                    </div>
+                </article>
+
+
+                <!-- ================= FASTCLOUD PRODUCT SLIDESHOW ================= -->
+                <div class="as-project-slideshow-card" id="fastcloud-gallery">
+                    <div class="as-slideshow-header">
+                        <div class="as-slideshow-header-info">
+                            <div class="as-slideshow-badge">
+                                <span class="as-live-dot"></span>
+                                <span>LIVE PRODUCT WALKTHROUGH</span>
+                            </div>
+                            <h4 class="as-slideshow-title">FastCloud System Interface &amp; Architecture Showcase</h4>
+                            <p class="as-slideshow-desc">
+                                Browse 5 live production screens showing how user prompts convert into visual topologies, multi-cloud deployments, and operational telemetry.
+                            </p>
+                        </div>
+                        <div class="as-slideshow-tabs" role="tablist" aria-label="FastCloud Slides">
+                            <button type="button" class="as-slide-tab is-active" data-slide-index="0" aria-selected="true">01 • Prompt Bar</button>
+                            <button type="button" class="as-slide-tab" data-slide-index="1" aria-selected="false">02 • Architecture Studio</button>
+                            <button type="button" class="as-slide-tab" data-slide-index="2" aria-selected="false">03 • Deploy CLI</button>
+                            <button type="button" class="as-slide-tab" data-slide-index="3" aria-selected="false">04 • Dashboard</button>
+                            <button type="button" class="as-slide-tab" data-slide-index="4" aria-selected="false">05 • AI Engineer</button>
+                        </div>
+                    </div>
+
+                    <!-- Slideshow Viewport -->
+                    <div class="as-slideshow-viewport">
+                        <button type="button" class="as-slide-nav as-slide-prev" id="fc-slide-prev" aria-label="Previous Slide">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                        </button>
+
+                        <div class="as-slides-track" id="fc-slides-track">
+                            <!-- Slide 1 -->
+                            <div class="as-slide is-active" data-index="0">
+                                <div class="as-slide-img-box">
+                                    <img src="assets/images/fastcloud/slide-1-hero.png" alt="FastCloud Hero and Prompt Bar" loading="lazy" />
+                                </div>
+                            </div>
+                            <!-- Slide 2 -->
+                            <div class="as-slide" data-index="1">
+                                <div class="as-slide-img-box">
+                                    <img src="assets/images/fastcloud/slide-2-architecture-studio.png" alt="FastCloud Architecture Studio" loading="lazy" />
+                                </div>
+                            </div>
+                            <!-- Slide 3 -->
+                            <div class="as-slide" data-index="2">
+                                <div class="as-slide-img-box">
+                                    <img src="assets/images/fastcloud/slide-3-deploy-cli.png" alt="FastCloud Deploy Workspace and Cloud Shell CLI" loading="lazy" />
+                                </div>
+                            </div>
+                            <!-- Slide 4 -->
+                            <div class="as-slide" data-index="3">
+                                <div class="as-slide-img-box">
+                                    <img src="assets/images/fastcloud/slide-4-dashboard.png" alt="FastCloud Operational Workspace Dashboard" loading="lazy" />
+                                </div>
+                            </div>
+                            <!-- Slide 5 -->
+                            <div class="as-slide" data-index="4">
+                                <div class="as-slide-img-box">
+                                    <img src="assets/images/fastcloud/slide-5-ai-engineer.png" alt="FastCloud AI Cloud Engineer Console" loading="lazy" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="button" class="as-slide-nav as-slide-next" id="fc-slide-next" aria-label="Next Slide">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </button>
+
+                        <div class="as-slide-counter-chip" id="fc-slide-counter">Slide 1 / 5</div>
+                    </div>
+
+                    <!-- Slide Footer / Caption -->
+                    <div class="as-slide-caption-card" id="fc-slide-caption">
+                        <div class="as-slide-caption-header">
+                            <span class="as-slide-caption-tag" id="fc-caption-stage">STAGE 01: NATURAL LANGUAGE INGESTION</span>
+                            <h5 class="as-slide-caption-title" id="fc-caption-title">Infrastructure as Prompt: Conversational Cloud Entry</h5>
+                        </div>
+                        <p class="as-slide-caption-body" id="fc-caption-body">
+                            Enables developers to describe complex multi-tier cloud environments in plain English instead of writing hundreds of lines of Terraform or navigating dozens of AWS/Azure console screens.
+                        </p>
+                    </div>
+
+                    <!-- Slide Dots Navigation -->
+                    <div class="as-slideshow-dots" id="fc-slideshow-dots" role="tablist">
+                        <button type="button" class="as-slide-dot is-active" data-index="0" aria-label="Go to Slide 1"></button>
+                        <button type="button" class="as-slide-dot" data-index="1" aria-label="Go to Slide 2"></button>
+                        <button type="button" class="as-slide-dot" data-index="2" aria-label="Go to Slide 3"></button>
+                        <button type="button" class="as-slide-dot" data-index="3" aria-label="Go to Slide 4"></button>
+                        <button type="button" class="as-slide-dot" data-index="4" aria-label="Go to Slide 5"></button>
+                    </div>
+                </div>
+
+
+                <!-- ================= 03: NEXUS AI ASSISTANT ================= -->
+                <article class="as-project-card-interactive" id="project-nexus-agent">
+
+                    <!-- 2. Header & Tags -->
+                    <div class="as-interactive-header">
+                        <div class="as-interactive-title-block">
+                            <div class="as-interactive-meta-pills">
+                                <span class="as-interactive-eyebrow">03 • AUTONOMOUS AGENTS &amp; MCP</span>
+                                <span class="as-interactive-pill-success">ZERO FRAMEWORK OVERHEAD</span>
+                                <span class="as-interactive-pill-accent">MODEL CONTEXT PROTOCOL (FASTMCP)</span>
+                                <span class="as-interactive-pill-success">AST CODE COMPREHENSION</span>
+                            </div>
+                            <h3 class="as-interactive-title">Nexus AI Assistant</h3>
+                            <div class="as-interactive-subtitle">
+                                Voice-Controlled Autonomous Desktop Agent with Model Context Protocol (FastMCP) &amp; Codebase Awareness
+                            </div>
+                            <div class="as-project-tech-tags">
+                                <span class="as-tag as-tag-accent">Python</span>
+                                <span class="as-tag as-tag-accent">Google Gemini</span>
+                                <span class="as-tag">FastMCP / MCP</span>
+                                <span class="as-tag">AST Code Parser</span>
+                                <span class="as-tag">SpeechRecognition</span>
+                                <span class="as-tag">pyttsx3 Neural TTS</span>
+                                <span class="as-tag">Deterministic Sandbox</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Two-Column Case Study: Problem & Results + Visual -->
+                    <div class="as-case-study-grid">
+                        <div class="as-case-study-content">
+                            <!-- 3. Plain English Explanation (Recruiter View) -->
+                            <div class="as-plain-summary">
+                                <strong>What It Does:</strong> Autonomous digital coworker powered by FastMCP. While typical chatbots are confined to a browser, <strong>Nexus</strong> listens to voice instructions, inspects local directories, parses code structures with AST, selects tools autonomously, and executes complex programming workflows safely on your machine.
+                            </div>
+
+                            <!-- 5. Action Buttons & Status -->
+                            <div class="as-interactive-actions">
+                                <div class="as-action-btns-group">
+                                    <button type="button" class="as-btn as-btn-primary" data-arch-target="nexus-agent"
+                                        onclick="openArchModal('nexus-agent')">
+                                        View Architecture Modal &rarr;
+                                    </button>
+                                    <a href="https://github.com/abdullahshaikh-0078" target="_blank" rel="noopener noreferrer"
+                                        class="as-btn as-btn-secondary">
+                                        GitHub
+                                    </a>
+                                </div>
+                                <div class="as-interactive-status-meta">
+                                    <span class="as-live-indicator">FastMCP Native</span>
+                                    <span>•</span>
+                                    <span>Zero Framework Overhead</span>
+                                    <span>•</span>
+                                    <span>AST Codebase Awareness</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: System Screenshot / Visual -->
+                        <div class="as-case-study-visual">
+                            <div class="as-case-study-frame">
+                                <img src="assets/images/nexus-agent-preview.webp" alt="Nexus AI Assistant Terminal and Autonomous Agent Interface" class="as-case-study-img" loading="lazy" />
+                                <div class="as-case-study-caption">
+                                    <span>Autonomous Agent &amp; FastMCP Execution</span>
+                                    <span>AST Code Parser • Speech I/O</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Expandable Technical Pipeline (For Senior Technical Leads) -->
+                    <details class="as-tech-details">
+                        <summary class="as-tech-summary">
+                            <span>⚙️ Deep Architecture: Inspect the 8-Stage Agent Pipeline</span>
+                        </summary>
+                        <div class="as-tech-details-content">
+                            <div class="as-pipeline-section">
+                                <div class="as-pipeline-top-row">
+                                    <div class="as-pipeline-title">
+                                        <span>⚡</span>
+                                        <span>8-Stage Framework-Free Autonomous Agent Pipeline</span>
+                                    </div>
+                                    <span class="as-pipeline-hint">Click any stage node below to inspect Data Inputs &amp; Outputs</span>
+                                </div>
+
+                                <div id="nexus-agent-pipeline-grid" class="as-pipeline-grid-4col">
+                                    <!-- Populated dynamically -->
+                                </div>
+
+                                <div class="as-inspector-box">
+                                    <div class="as-inspector-top">
+                                        <div class="as-inspector-title-row">
+                                            <span id="nexus-agent-inspect-num" class="as-inspector-num-badge">STAGE 01</span>
+                                            <span id="nexus-agent-inspect-title" class="as-inspector-title">Multimodal Input Ingest</span>
+                                        </div>
+                                        <span id="nexus-agent-inspect-tech" class="as-inspector-tech-badge">SpeechRecognition • WebRTC</span>
+                                    </div>
+                                    <p id="nexus-agent-inspect-desc" class="as-inspector-desc">
+                                        Ingests user instructions via microphone or terminal. Handles ambient noise calibration and continuous speech-to-text transcription.
+                                    </p>
+                                    <div class="as-inspector-io-grid">
+                                        <div class="as-inspector-io-item">
+                                            <span class="as-io-label">Input Data</span>
+                                            <span id="nexus-agent-inspect-input" class="as-io-val">Microphone audio stream or text prompt</span>
+                                        </div>
+                                        <div class="as-inspector-io-item">
+                                            <span class="as-io-label">Output Data</span>
+                                            <span id="nexus-agent-inspect-output" class="as-io-val output-val">Transcribed user command</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                </article>
+
+
+                <!-- ================= 04: AI NEWS INTELLIGENCE ================= -->
+                <article class="as-project-card-interactive" id="project-ai-news">
+
+                    <!-- 2. Header & Tags -->
+                    <div class="as-interactive-header">
+                        <div class="as-interactive-title-block">
+                            <div class="as-interactive-meta-pills">
+                                <span class="as-interactive-eyebrow">04 • INTELLIGENCE &amp; VECTOR SEARCH</span>
+                                <span class="as-interactive-pill-success">1,300+ ARTICLES INGESTED</span>
+                                <span class="as-interactive-pill-accent">POSTGRESQL 18 + PGVECTOR 0.8.6</span>
+                                <span class="as-interactive-pill-success">6-SIGNAL OBJECTIVE RANKING</span>
+                            </div>
+                            <h3 class="as-interactive-title">AI News Intelligence &amp; Synthesis Platform</h3>
+                            <div class="as-interactive-subtitle">
+                                Production Autonomous Ingestion, Native pgvector Cosine Distance Deduplication &amp; Automated Digest Dispatch
+                            </div>
+                            <div class="as-project-tech-tags">
+                                <span class="as-tag as-tag-accent">Python</span>
+                                <span class="as-tag as-tag-accent">FastAPI</span>
+                                <span class="as-tag">PostgreSQL 18</span>
+                                <span class="as-tag">pgvector 0.8.6</span>
+                                <span class="as-tag">Gemini 1536d Embeddings</span>
+                                <span class="as-tag">Docker</span>
+                                <span class="as-tag">SQLAlchemy</span>
+                                <span class="as-tag">Resend API</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Two-Column Case Study: Problem & Results + Visual -->
+                    <div class="as-case-study-grid">
+                        <div class="as-case-study-content">
+                            <!-- 3. Plain English Explanation (Recruiter View) -->
+                            <div class="as-plain-summary">
+                                <strong>What It Does:</strong> Autonomous multi-source AI news intelligence platform. Ingests over 1,300 articles daily across RSS, ArXiv, and community sources, performs cosine vector deduplication via native pgvector inside PostgreSQL 18, applies a 6-signal ranking engine, and automatically generates executive digests with zero latency.
+                            </div>
+
+                            <!-- 5. Action Buttons & Status -->
+                            <div class="as-interactive-actions">
+                                <div class="as-action-btns-group">
+                                    <a href="#ai-news" class="as-btn as-btn-primary">
+                                        Try it out &rarr;
+                                    </a>
+                                    <button type="button" class="as-btn as-btn-secondary" data-arch-target="ai-news"
+                                        onclick="openArchModal('ai-news')">
+                                        View Architecture Modal
+                                    </button>
+                                    <a href="https://github.com/abdullahshaikh-0078" target="_blank" rel="noopener noreferrer"
+                                        class="as-btn as-btn-secondary">
+                                        GitHub
+                                    </a>
+                                </div>
+                                <div class="as-interactive-status-meta">
+                                    <span class="as-live-indicator">Production Ready</span>
+                                    <span>•</span>
+                                    <span>159/159 Passing Tests</span>
+                                    <span>•</span>
+                                    <span>pgvector Cosine Deduplication</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: System Screenshot / Visual -->
+                        <div class="as-case-study-visual">
+                            <div class="as-case-study-frame">
+                                <img src="assets/images/ai-news-preview.webp" alt="AI News Intelligence Production Dashboard and Vector Deduplication" class="as-case-study-img" loading="lazy" />
+                                <div class="as-case-study-caption">
+                                    <span>Autonomous Pipeline &amp; Deduplication Console</span>
+                                    <span>PostgreSQL 18 + pgvector 0.8.6</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Expandable Technical Pipeline (For Senior Technical Leads) -->
+                    <details class="as-tech-details">
+                        <summary class="as-tech-summary">
+                            <span>⚙️ Deep Architecture: Inspect the 8-Stage Synthesis Pipeline</span>
+                        </summary>
+                        <div class="as-tech-details-content">
+                            <div class="as-pipeline-section">
+                                <div class="as-pipeline-top-row">
+                                    <div class="as-pipeline-title">
+                                        <span>⚡</span>
+                                        <span>8-Stage Ingestion, Vector Deduplication &amp; Synthesis Pipeline</span>
+                                    </div>
+                                    <span class="as-pipeline-hint">Click any stage node below to inspect Data Inputs &amp; Outputs</span>
+                                </div>
+
+                                <div id="ai-news-pipeline-grid" class="as-pipeline-grid-4col">
+                                    <!-- Populated dynamically -->
+                                </div>
+
+                                <div class="as-inspector-box">
+                                    <div class="as-inspector-top">
+                                        <div class="as-inspector-title-row">
+                                            <span id="ai-news-inspect-num" class="as-inspector-num-badge">STAGE 01</span>
+                                            <span id="ai-news-inspect-title" class="as-inspector-title">Multi-Source Sweeper</span>
+                                        </div>
+                                        <span id="ai-news-inspect-tech" class="as-inspector-tech-badge">Feedparser • YouTube API</span>
+                                    </div>
+                                    <p id="ai-news-inspect-desc" class="as-inspector-desc">
+                                        Continuously sweeps 8+ authoritative sources across official research repos, community discussions, and tech journalism.
+                                    </p>
+                                    <div class="as-inspector-io-grid">
+                                        <div class="as-inspector-io-item">
+                                            <span class="as-io-label">Input Data</span>
+                                            <span id="ai-news-inspect-input" class="as-io-val">Raw RSS feeds, JSON endpoints, video transcripts</span>
+                                        </div>
+                                        <div class="as-inspector-io-item">
+                                            <span class="as-io-label">Output Data</span>
+                                            <span id="ai-news-inspect-output" class="as-io-val output-val">Raw unparsed content payloads</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+                </article>
+
             </div>
         </div>
     </section>
 
 
-    <!-- ================= WRITING ================= -->
-    <section id="as-writing" class="as-section as-reveal">
-        <div class="as-container">
-            <h2 class="as-section-title">Technical Writing</h2>
+    <!-- ================= 5. APPLIED ENGINEERING EXPERIENCE ================= -->
+    <section id="experience" class="as-experience-section">
+        <div class="as-container-wide">
 
-            <div class="as-writing-list">
-                <!-- Blog entries go here -->
+            <div class="as-section-header-left">
+                <div class="as-section-eyebrow">
+                    <span>APPLIED ENGINEERING TRACK RECORD</span>
+                </div>
+                <h2 class="as-section-title">Professional Experience</h2>
+                <p class="as-section-desc">
+                    Hands-on engineering in data pipelines, machine learning models, and production workflows.
+                </p>
             </div>
+
+            <div class="as-experience-timeline">
+
+                <!-- Experience 1 -->
+                <div class="as-exp-card">
+                    <div class="as-exp-node">⚡</div>
+                    <div class="as-exp-body">
+                        <div class="as-exp-meta">
+                            <h3 class="as-exp-role">AI/ML Intern</h3>
+                            <span class="as-exp-period">Jan 2026 – Apr 2026</span>
+                        </div>
+                        <div class="as-exp-org">CampUs Grow &bull; Hyderabad, India</div>
+                        <p class="as-exp-desc">
+                            Completed Demand Forecast Analysis project applying end-to-end machine learning, exploratory
+                            data analysis, robust feature engineering, and rigorous cross-validation on real-world
+                            multi-dimensional datasets.
+                        </p>
+                        <span class="as-exp-recognition">Grade A+ Recognition</span>
+                    </div>
+                </div>
+
+                <!-- Experience 2 -->
+                <div class="as-exp-card">
+                    <div class="as-exp-node">🛠️</div>
+                    <div class="as-exp-body">
+                        <div class="as-exp-meta">
+                            <h3 class="as-exp-role">AI/ML with Python Training</h3>
+                            <span class="as-exp-period">Oct 2025 – Mar 2026</span>
+                        </div>
+                        <div class="as-exp-org">Shyam Technologies &bull; Hyderabad, India</div>
+                        <p class="as-exp-desc">
+                            5-month intensive applied engineering training covering automated data pipelines,
+                            supervised/unsupervised ML model architectures, automated evaluation benchmarks, and
+                            scalable Python workflows.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </section>
 
 
-    <!-- ================= METRICS DASHBOARD ================= -->
-    <section id="as-metrics" class="as-section as-reveal">
-        <div class="as-container">
-            <h2 class="as-section-title">Engineering Metrics</h2>
+    <!-- ================= 6. TECHNICAL SKILLS MATRIX ================= -->
+    <section id="skills" class="as-skills-section">
+        <div class="as-container-wide">
 
-            <div id="as-metrics-grid">
-                <!-- Metrics rendered from JSON -->
+            <div class="as-section-header-left">
+                <div class="as-section-eyebrow">
+                    <span>TECHNICAL MATRIX</span>
+                </div>
+                <h2 class="as-section-title">Engineering Competencies</h2>
+                <p class="as-section-desc">
+                    Categorized matrix of systems, frameworks, retrieval protocols, and cloud infrastructure.
+                </p>
             </div>
+
+            <div class="as-skills-grid">
+
+                <!-- 1. AI and Generative AI -->
+                <div class="as-skill-category-card">
+                    <div class="as-skill-cat-header">
+                        <span class="as-skill-cat-icon">🤖</span>
+                        <h3 class="as-skill-cat-title">AI &amp; Generative AI</h3>
+                    </div>
+                    <div class="as-skill-items-wrap">
+                        <span class="as-skill-token primary">LLMs</span>
+                        <span class="as-skill-token primary">Agentic AI</span>
+                        <span class="as-skill-token">Autonomous Workflows</span>
+                        <span class="as-skill-token">Tool Execution</span>
+                        <span class="as-skill-token">Prompt Engineering</span>
+                        <span class="as-skill-token primary">Google Gemini</span>
+                        <span class="as-skill-token primary">Model Context Protocol</span>
+                        <span class="as-skill-token">FastMCP</span>
+                    </div>
+                </div>
+
+                <!-- 2. Retrieval and Vector Databases -->
+                <div class="as-skill-category-card">
+                    <div class="as-skill-cat-header">
+                        <span class="as-skill-cat-icon">🔍</span>
+                        <h3 class="as-skill-cat-title">Retrieval &amp; Vector Databases</h3>
+                    </div>
+                    <div class="as-skill-items-wrap">
+                        <span class="as-skill-token primary">Hybrid Search</span>
+                        <span class="as-skill-token">BM25 Okapi</span>
+                        <span class="as-skill-token">Dense Retrieval</span>
+                        <span class="as-skill-token">Semantic Retrieval</span>
+                        <span class="as-skill-token primary">Qdrant HNSW</span>
+                        <span class="as-skill-token primary">pgvector</span>
+                        <span class="as-skill-token">Chunking Strategies</span>
+                        <span class="as-skill-token">Recall &amp; MRR Evaluation</span>
+                    </div>
+                </div>
+
+                <!-- 3. Backend and APIs -->
+                <div class="as-skill-category-card">
+                    <div class="as-skill-cat-header">
+                        <span class="as-skill-cat-icon">⚡</span>
+                        <h3 class="as-skill-cat-title">Backend &amp; APIs</h3>
+                    </div>
+                    <div class="as-skill-items-wrap">
+                        <span class="as-skill-token primary">Python</span>
+                        <span class="as-skill-token primary">FastAPI</span>
+                        <span class="as-skill-token">Node.js</span>
+                        <span class="as-skill-token">Express.js</span>
+                        <span class="as-skill-token">REST APIs</span>
+                        <span class="as-skill-token">Async I/O</span>
+                        <span class="as-skill-token">SQLAlchemy</span>
+                        <span class="as-skill-token">PostgreSQL</span>
+                        <span class="as-skill-token">MongoDB</span>
+                    </div>
+                </div>
+
+                <!-- 4. Machine Learning and Data -->
+                <div class="as-skill-category-card">
+                    <div class="as-skill-cat-header">
+                        <span class="as-skill-cat-icon">🧠</span>
+                        <h3 class="as-skill-cat-title">Machine Learning &amp; Data</h3>
+                    </div>
+                    <div class="as-skill-items-wrap">
+                        <span class="as-skill-token primary">System Design</span>
+                        <span class="as-skill-token">Data Structures &amp; Algorithms</span>
+                        <span class="as-skill-token">Scikit-Learn</span>
+                        <span class="as-skill-token">Pandas</span>
+                        <span class="as-skill-token">NumPy</span>
+                        <span class="as-skill-token">Feature Engineering</span>
+                        <span class="as-skill-token">Cross-Validation</span>
+                    </div>
+                </div>
+
+                <!-- 5. Cloud and Automation -->
+                <div class="as-skill-category-card" style="grid-column: 1 / -1;">
+                    <div class="as-skill-cat-header">
+                        <span class="as-skill-cat-icon">☁️</span>
+                        <h3 class="as-skill-cat-title">Cloud &amp; Automation</h3>
+                    </div>
+                    <div class="as-skill-items-wrap">
+                        <span class="as-skill-token primary">AWS SDK</span>
+                        <span class="as-skill-token primary">Azure SDK</span>
+                        <span class="as-skill-token primary">Docker</span>
+                        <span class="as-skill-token">Git</span>
+                        <span class="as-skill-token">CI/CD</span>
+                        <span class="as-skill-token">Linux</span>
+                        <span class="as-skill-token">Idempotent DAG Orchestration</span>
+                        <span class="as-skill-token">Automated Telemetry</span>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </section>
 
 
-    <!-- ================= CONTACT ================= -->
-    <section id="as-contact" class="as-section as-reveal">
-        <div class="as-container">
-            <h2 class="as-section-title">Let’s Connect</h2>
+    <!-- ================= 7. CERTIFICATIONS ================= -->
+    <section id="certifications" class="as-certs-section">
+        <div class="as-container-wide">
 
-            <div class="as-contact-content">
-                <p>Email: abdullahmuk2025@gmail.com</p>
-                <p>GitHub: github.com/abdullahshaikh-0078</p>
-                <p>LinkedIn: linkedin.com/in/yourprofile</p>
+            <div class="as-section-header-left">
+                <div class="as-section-eyebrow">
+                    <span>VERIFIED CREDENTIALS</span>
+                </div>
+                <h2 class="as-section-title">Certifications</h2>
+                <p class="as-section-desc">
+                    Recognized credentials in cloud AI, MCP agent automation, and applied machine learning.
+                </p>
             </div>
+
+            <div class="as-certs-grid">
+
+                <div class="as-cert-card">
+                    <div>
+                        <div class="as-cert-badge-icon">☁️</div>
+                        <h3 class="as-cert-name">Microsoft Certified: Azure AI Fundamentals</h3>
+                    </div>
+                    <div class="as-cert-issuer">Issuer: Microsoft</div>
+                </div>
+
+                <div class="as-cert-card">
+                    <div>
+                        <div class="as-cert-badge-icon">🤖</div>
+                        <h3 class="as-cert-name">Build MCP Automation Projects with n8n: Connect AI Clients</h3>
+                    </div>
+                    <div class="as-cert-issuer">Issuer: Coursera</div>
+                </div>
+
+                <div class="as-cert-card">
+                    <div>
+                        <div class="as-cert-badge-icon">🐍</div>
+                        <h3 class="as-cert-name">AI/ML with Python Certification</h3>
+                    </div>
+                    <div class="as-cert-issuer">Issuer: Shyam Technologies</div>
+                </div>
+
+                <div class="as-cert-card">
+                    <div>
+                        <div class="as-cert-badge-icon">📊</div>
+                        <h3 class="as-cert-name">Artificial Intelligence &amp; Machine Learning</h3>
+                    </div>
+                    <div class="as-cert-issuer">Issuer: Internshala Trainings</div>
+                </div>
+
+            </div>
+
         </div>
     </section>
 
 
-    <!-- ================= FOOTER ================= -->
+    <!-- ================= 8. COMPACT EDUCATION (WIDE & LEFT-ALIGNED) ================= -->
+    <section id="education" class="as-edu-section">
+        <div class="as-container-wide">
+
+            <div class="as-section-header-left">
+                <div class="as-section-eyebrow">
+                    <span>ACADEMIC FOUNDATION</span>
+                </div>
+                <h2 class="as-section-title">Education</h2>
+            </div>
+
+            <div class="as-edu-card">
+                <div>
+                    <h3 class="as-degree-title">Bachelor of Engineering in Computer Science Engineering</h3>
+                    <div class="as-degree-inst">Muffakham Jah College of Engineering &amp; Technology (MJCET)</div>
+                    <div class="as-degree-sub">Osmania University &bull; 2022 – 2026</div>
+
+                    <div class="as-cgpa-box">
+                        <span class="as-cgpa-label">CGPA</span>
+                        <span class="as-cgpa-val">7.77 / 10.0</span>
+                    </div>
+                </div>
+
+                <div class="as-academic-records-col">
+                    <div class="as-acad-header">Academic Record</div>
+                    <div class="as-academic-metrics-box">
+                        <div class="as-acad-row">
+                            <span>12th — SSC Telangana India Board</span>
+                            <span>94%</span>
+                        </div>
+                        <div class="as-acad-row">
+                            <span>10th — CBSE India</span>
+                            <span>87%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ================= 9. CONTACT (WIDE EDITORIAL CARD) ================= -->
+    <section id="contact" class="as-contact-section">
+        <div class="as-container-wide">
+            <div class="as-contact-card">
+                <!-- Left Column: Headline & Subtext -->
+                <div class="as-contact-info-col">
+                    <div class="as-contact-eyebrow">CONTACT</div>
+                    <h2 class="as-contact-headline">Let’s build intelligent systems together.</h2>
+                    <p class="as-contact-subtext">
+                        Open to AI Engineer, Generative AI, and Agentic Systems roles in India &amp; Remote.
+                    </p>
+                </div>
+
+                <!-- Right Column: Methods & Resume CTA -->
+                <div class="as-contact-actions-col">
+                    <div class="as-contact-methods-stack">
+                        <!-- Click-to-copy Email -->
+                        <button type="button" class="as-contact-item as-copy-email-btn" data-email="abdullahmuk2025@gmail.com"
+                            title="Click to copy email">
+                            <span>✉</span>
+                            <span class="as-email-text">abdullahmuk2025@gmail.com</span>
+                            <span class="as-copied-toast" style="display:none;">Copied!</span>
+                        </button>
+
+                        <div class="as-contact-social-row">
+                            <!-- LinkedIn -->
+                            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="as-contact-item"
+                                title="LinkedIn Profile">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path
+                                        d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.46 1.46 0 1 0 0-2.92 1.46 1.46 0 0 0 0 2.92M7.86 18.5V10.13H5.07V18.5h2.79z" />
+                                </svg>
+                                <span>LinkedIn</span>
+                            </a>
+
+                            <!-- GitHub -->
+                            <a href="https://github.com/abdullahshaikh-0078" target="_blank" rel="noopener noreferrer"
+                                class="as-contact-item" title="GitHub Profile">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                                </svg>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="as-contact-resume-wrap">
+                        <button type="button" onclick="openResumeModal()" class="as-btn as-btn-primary" title="View Resume">
+                            <span>View Complete Resume &rarr;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="as-footer">
         <div class="as-container">
-            <p>© 2026 Abdullah Shaikh — AI Systems Engineer</p>
+            <p>&copy; 2026 Abdullah Mukhtar Shaikh &bull; AI Systems Engineer &bull; Production-Ready AI Systems</p>
         </div>
     </footer>
 
 
+    <!-- ================= HIGH CONTRAST ARCHITECTURE MODAL ================= -->
+    <div id="as-arch-modal-backdrop" class="as-arch-modal-backdrop" aria-hidden="true">
+        <div class="as-arch-modal-box" role="dialog" aria-modal="true">
+            <button type="button" id="as-arch-modal-close" class="as-arch-modal-close"
+                aria-label="Close modal">&times;</button>
+            <div id="as-arch-modal-content"></div>
+        </div>
+    </div>
+
+
+    <!-- ================= POLISHED NEWSLETTER CUSTOMIZATION MODAL ================= -->
+    <div id="as-customization-modal" class="as-modal-backdrop" style="display:none;" aria-hidden="true">
+        <div class="as-modal-container" role="dialog" aria-modal="true" aria-labelledby="as-modal-title" aria-describedby="as-modal-subtitle">
+            <div class="as-modal-header">
+                <div class="as-modal-header-content">
+                    <h3 id="as-modal-title" class="as-modal-title">Customize your AI News</h3>
+                    <p id="as-modal-subtitle" class="as-modal-subtitle">Choose what you want to receive and when you want to receive it.</p>
+                </div>
+                <button type="button" id="as-modal-close-btn" class="as-modal-close" aria-label="Close modal">&times;</button>
+            </div>
+
+            <form id="as-customization-form" class="as-modal-body" novalidate>
+                <!-- Section 1 — Your Details -->
+                <div class="as-form-section">
+                    <h4 class="as-form-section-title">Your Details</h4>
+                    <div class="as-form-row-2col">
+                        <div class="as-form-group">
+                            <label class="as-form-label" for="as-modal-name">Name <span class="as-required">*</span></label>
+                            <input type="text" id="as-modal-name" class="as-form-input" placeholder="Your name" required autocomplete="name" />
+                        </div>
+                        <div class="as-form-group">
+                            <label class="as-form-label" for="as-modal-email">Email Address <span class="as-required">*</span></label>
+                            <input type="email" id="as-modal-email" class="as-form-input" placeholder="you@example.com" required autocomplete="email" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2 — Delivery Frequency -->
+                <div class="as-form-section">
+                    <h4 class="as-form-section-title">Delivery Frequency</h4>
+                    <div class="as-radio-cards-grid" role="radiogroup" aria-label="Delivery Frequency">
+                        <label class="as-radio-card" id="as-freq-card-daily">
+                            <input type="radio" name="as-frequency" value="DAILY" checked />
+                            <span class="as-radio-indicator" aria-hidden="true"></span>
+                            <div class="as-radio-text-wrap">
+                                <span class="as-radio-title">Daily</span>
+                                <span class="as-radio-desc">Receive the latest curated AI news every day.</span>
+                            </div>
+                        </label>
+                        <label class="as-radio-card" id="as-freq-card-weekly">
+                            <input type="radio" name="as-frequency" value="WEEKLY" />
+                            <span class="as-radio-indicator" aria-hidden="true"></span>
+                            <div class="as-radio-text-wrap">
+                                <span class="as-radio-title">Weekly</span>
+                                <span class="as-radio-desc">Receive a deeper weekly digest.</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <!-- Weekly Day Selector (Conditional) -->
+                    <div id="as-weekly-day-group" class="as-weekly-day-wrap" style="display:none;">
+                        <label class="as-form-label" for="as-pref-day">Delivery Day</label>
+                        <select id="as-pref-day" class="as-form-select">
+                            <option value="Sunday" selected>Sunday (Default)</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Section 3 — Preferred Delivery Time & Time Zone -->
+                <div class="as-form-section">
+                    <div class="as-form-row-2col">
+                        <div class="as-form-group">
+                            <label class="as-form-label" for="as-pref-time">Preferred Delivery Time <span class="as-required">*</span></label>
+                            <select id="as-pref-time" class="as-form-select">
+                                <option value="06:00 AM">06:00 AM</option>
+                                <option value="07:00 AM">07:00 AM</option>
+                                <option value="08:00 AM" selected>08:00 AM (Default)</option>
+                                <option value="09:00 AM">09:00 AM</option>
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="12:00 PM">12:00 PM</option>
+                                <option value="05:00 PM">05:00 PM</option>
+                                <option value="06:00 PM">06:00 PM</option>
+                            </select>
+                        </div>
+                        <div class="as-form-group">
+                            <label class="as-form-label" for="as-pref-timezone">Time Zone</label>
+                            <input type="text" id="as-pref-timezone" class="as-form-input" placeholder="Auto-detected timezone" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4 — Topics & Interests -->
+                <div class="as-form-section">
+                    <h4 class="as-form-section-title">Topics &amp; Interests</h4>
+                    <p class="as-form-section-desc">Select topics that matter to you (multiple selections allowed).</p>
+                    <div class="as-topic-chips-grid">
+                        <label class="as-topic-chip">
+                            <input type="checkbox" name="topics" value="LLMs" checked />
+                            <span class="as-topic-chip-label">LLMs</span>
+                        </label>
+                        <label class="as-topic-chip">
+                            <input type="checkbox" name="topics" value="Generative AI" checked />
+                            <span class="as-topic-chip-label">Generative AI</span>
+                        </label>
+                        <label class="as-topic-chip">
+                            <input type="checkbox" name="topics" value="AI Agents" checked />
+                            <span class="as-topic-chip-label">AI Agents</span>
+                        </label>
+                        <label class="as-topic-chip">
+                            <input type="checkbox" name="topics" value="RAG" checked />
+                            <span class="as-topic-chip-label">RAG</span>
+                        </label>
+                        <label class="as-topic-chip">
+                            <input type="checkbox" name="topics" value="AI Research" checked />
+                            <span class="as-topic-chip-label">AI Research</span>
+                        </label>
+                        <label class="as-topic-chip">
+                            <input type="checkbox" name="topics" value="Computer Vision" />
+                            <span class="as-topic-chip-label">Computer Vision</span>
+                        </label>
+                        <label class="as-topic-chip">
+                            <input type="checkbox" name="topics" value="Robotics" />
+                            <span class="as-topic-chip-label">Robotics</span>
+                        </label>
+                        <label class="as-topic-chip">
+                            <input type="checkbox" name="topics" value="AI Infrastructure" />
+                            <span class="as-topic-chip-label">AI Infrastructure</span>
+                        </label>
+                        <label class="as-topic-chip">
+                            <input type="checkbox" name="topics" value="Developer Tools" />
+                            <span class="as-topic-chip-label">Developer Tools</span>
+                        </label>
+                        <label class="as-topic-chip">
+                            <input type="checkbox" name="topics" value="Cloud AI" />
+                            <span class="as-topic-chip-label">Cloud AI</span>
+                        </label>
+                        <label class="as-topic-chip">
+                            <input type="checkbox" name="topics" value="AI Startups" />
+                            <span class="as-topic-chip-label">AI Startups</span>
+                        </label>
+                        <label class="as-topic-chip">
+                            <input type="checkbox" name="topics" value="Open Source AI" />
+                            <span class="as-topic-chip-label">Open Source AI</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Section 5 — Content Preferences -->
+                <div class="as-form-section">
+                    <h4 class="as-form-section-title">Content Preferences</h4>
+                    <div class="as-content-checkboxes-grid">
+                        <label class="as-checkbox-card">
+                            <input type="checkbox" name="content_types" value="Research & Papers" checked />
+                            <span class="as-checkbox-indicator">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </span>
+                            <span class="as-checkbox-title">Research &amp; Papers</span>
+                        </label>
+                        <label class="as-checkbox-card">
+                            <input type="checkbox" name="content_types" value="Model Releases" checked />
+                            <span class="as-checkbox-indicator">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </span>
+                            <span class="as-checkbox-title">Model Releases</span>
+                        </label>
+                        <label class="as-checkbox-card">
+                            <input type="checkbox" name="content_types" value="AI Engineering" checked />
+                            <span class="as-checkbox-indicator">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </span>
+                            <span class="as-checkbox-title">AI Engineering</span>
+                        </label>
+                        <label class="as-checkbox-card">
+                            <input type="checkbox" name="content_types" value="Agentic Systems" checked />
+                            <span class="as-checkbox-indicator">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </span>
+                            <span class="as-checkbox-title">Agentic Systems</span>
+                        </label>
+                        <label class="as-checkbox-card">
+                            <input type="checkbox" name="content_types" value="Industry & Startups" />
+                            <span class="as-checkbox-indicator">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </span>
+                            <span class="as-checkbox-title">Industry &amp; Startups</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Section 6 — Delivery Channel -->
+                <div class="as-form-section">
+                    <h4 class="as-form-section-title">Delivery Channel</h4>
+                    <div class="as-channels-list">
+                        <div class="as-channel-card">
+                            <div class="as-channel-left">
+                                <span>Email Newsletter</span>
+                            </div>
+                            <span class="as-channel-status-pill active">Active</span>
+                        </div>
+                        <div class="as-channel-card as-channel-disabled" title="Slack integration coming soon">
+                            <div class="as-channel-left">
+                                <span>Slack Webhook</span>
+                            </div>
+                            <span class="as-channel-status-pill coming-soon">Coming Soon</span>
+                        </div>
+                        <div class="as-channel-card as-channel-disabled" title="Telegram integration coming soon">
+                            <div class="as-channel-left">
+                                <span>Telegram Bot</span>
+                            </div>
+                            <span class="as-channel-status-pill coming-soon">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inline Modal Feedback -->
+                <div id="as-modal-feedback" class="as-modal-feedback" style="display:none;" role="status"></div>
+            </form>
+
+            <!-- Actions (Pinned) -->
+            <div class="as-modal-actions">
+                <button type="button" id="as-modal-cancel-btn" class="as-btn as-btn-secondary">Cancel</button>
+                <button type="submit" form="as-customization-form" id="as-modal-save-btn" class="as-btn as-btn-primary">
+                    <span class="as-save-text">Save Preferences</span>
+                    <span class="as-save-spinner" style="display:none;"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ================= RESUME VIEWER POPUP MODAL ================= -->
+    <div id="as-resume-modal" class="as-resume-modal-backdrop" aria-hidden="true" role="dialog" aria-labelledby="as-resume-title">
+        <div class="as-resume-modal-box">
+            <!-- Modal Header / Action Toolbar -->
+            <div class="as-resume-modal-header">
+                <div class="as-resume-modal-info">
+                    <div class="as-resume-modal-badge">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10 9 9 9 8 9"></polyline>
+                        </svg>
+                        <span>Curriculum Vitae</span>
+                    </div>
+                    <h3 class="as-resume-modal-title" id="as-resume-title">Abdullah Mukhtar Shaikh</h3>
+                    <p class="as-resume-modal-subtitle">AI Engineer • Production RAG, Autonomous Agents &amp; Cloud Systems</p>
+                </div>
+
+                <div class="as-resume-modal-actions">
+                    <!-- Download Button Inside Modal -->
+                    <a href="assets/Abdullah_Mukhtar_Shaikh_Resume.pdf" download="Abdullah_Mukhtar_Shaikh_Resume.pdf" class="as-btn as-btn-primary as-resume-download-btn" title="Download PDF to device">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        <span>Download Resume</span>
+                    </a>
+
+                    <!-- Open in New Tab -->
+                    <a href="assets/Abdullah_Mukhtar_Shaikh_Resume.pdf" target="_blank" rel="noopener noreferrer" class="as-btn as-btn-secondary as-resume-tab-btn" title="Open PDF in new browser tab">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        <span>New Tab</span>
+                    </a>
+
+                    <!-- Close Button -->
+                    <button type="button" class="as-modal-close" onclick="closeResumeModal()" aria-label="Close resume viewer">&times;</button>
+                </div>
+            </div>
+
+            <!-- PDF Viewer Body -->
+            <div class="as-resume-modal-body">
+                <div class="as-resume-paper-wrap">
+                    <img src="assets/images/resume-page-1.png" alt="Abdullah Mukhtar Shaikh - AI Engineer Resume Preview" class="as-resume-image" loading="lazy" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <!-- ================= SCRIPTS ================= -->
+    <script src="scripts/bundle.js"></script>
     <script src="scripts/main.js" type="module"></script>
 
 </body>
+
 </html>

@@ -1,137 +1,272 @@
-/* ===== NAVBAR ===== */
+/* ===== UNIFIED CLEAN WORKSPACE NAVBAR ===== */
 
 .as-navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
-    background-color: var(--as-color-bg-primary);
-    border-bottom: 1px solid var(--as-color-border);
     z-index: 1000;
+    background: var(--as-color-bg-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    transition: all var(--transition);
+    padding: 0.75rem 0;
+}
+
+.as-navbar.as-scrolled {
+    padding: 0.55rem 0;
+    box-shadow: var(--shadow-sm);
 }
 
 .as-navbar-container {
+    width: min(100% - 48px, 1320px);
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
-    max-width: 1200px;
-    margin: 0 auto;
-
-    padding: 1rem 24px;
+    gap: 1.5rem;
 }
 
+/* Left: Clean Brand Wordmark */
+.as-navbar-brand,
 .as-logo {
-    font-weight: 600;
-    font-size: var(--as-text-md);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none !important;
+    color: var(--foreground) !important;
+    line-height: 1.15;
+    transition: opacity var(--transition);
 }
 
+.as-navbar-brand:hover,
+.as-logo:hover {
+    opacity: 0.85;
+}
+
+.as-brand-name {
+    font-size: 0.975rem;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: var(--foreground) !important;
+    white-space: nowrap;
+    text-decoration: none !important;
+}
+
+.as-brand-role {
+    font-family: var(--font-mono);
+    font-size: 0.675rem;
+    font-weight: 500;
+    color: var(--muted-foreground) !important;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 1px;
+    text-decoration: none !important;
+}
+
+/* Center: Navigation Links */
 .as-nav-links {
     display: flex;
-    gap: 2rem;
+    align-items: center;
+    gap: 1.5rem;
     list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .as-nav-links a {
     text-decoration: none;
-    color: var(--as-color-text-secondary);
-    font-size: var(--as-text-sm);
-    transition: color 0.2s ease;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--muted-foreground);
+    transition: color var(--transition);
+    padding: 0.25rem 0;
+    white-space: nowrap;
 }
 
-.as-nav-links a:hover {
-    color: var(--as-color-text-primary);
+.as-nav-links a:hover,
+.as-nav-links a.active {
+    color: var(--foreground);
 }
 
-.as-theme-toggle {
-
-    background: none;
-    border: none;
-    cursor: pointer;
-
-    font-size: 1.2rem;
-
-    color: var(--as-color-text-secondary);
-
-    transition: color 0.2s ease;
-
+/* AI News Live Demo Navigation Pill */
+.as-nav-live-pill {
+    display: inline-flex !important;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.8125rem !important;
+    font-weight: 600 !important;
+    color: var(--foreground) !important;
+    background: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.28rem 0.75rem !important;
+    border-radius: var(--radius-full);
+    transition: all var(--transition);
+    white-space: nowrap;
 }
 
-.as-theme-toggle:hover {
-
-    color: var(--as-color-text-primary);
-
-}
-/* ===== THEME SWITCH ===== */
-
-/* Toggle container */
-
-.as-theme-switch {
-    position: relative;
-    display: inline-block;
-    width: 54px;
-    height: 28px;
+.as-nav-live-pill:hover {
+    border-color: var(--border-strong);
+    background: var(--surface-hover);
+    color: var(--foreground) !important;
+    transform: translateY(-1px);
 }
 
-.as-theme-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
+.as-nav-live-pill .as-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--success);
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(34, 197, 94, 0.45);
 }
 
-/* Slider background */
-
-.as-theme-slider {
-    position: absolute;
-    cursor: pointer;
-
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-
-    background-color: var(--as-color-border);
-    border-radius: 34px;
-
-    transition: 0.3s ease;
-}
-
-/* Toggle knob */
-
-.as-theme-slider::before {
-
-    content: "🌙";
-
-    position: absolute;
-
+/* Right Actions: Status, Resume CTA, Theme Toggle, Mobile Toggle */
+.as-navbar-actions {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 0.75rem;
+}
 
-    font-size: 12px;
+/* Available Status Badge */
+.as-status-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--muted-foreground);
+    background: var(--muted);
+    border: 1px solid var(--border);
+    padding: 0.3rem 0.65rem;
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+}
 
-    height: 22px;
-    width: 22px;
-
-    left: 3px;
-    bottom: 3px;
-
-    background-color: white;
-
+.as-status-dot {
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-
-    transition: 0.3s ease;
+    background-color: var(--success);
+    flex-shrink: 0;
 }
 
-/* When toggled (light mode) */
-
-input:checked + .as-theme-slider {
-    background-color: var(--as-color-accent);
+/* Download Resume Button */
+.as-nav-resume-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: inherit;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    height: 34px;
+    padding: 0 0.9rem;
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--transition);
+    white-space: nowrap;
 }
 
-input:checked + .as-theme-slider::before {
+.as-nav-resume-btn:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-strong);
+    color: var(--foreground);
+}
 
-    content: "☀️";
+/* Compact Theme Toggle Button */
+.as-theme-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: var(--radius-sm);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+    cursor: pointer;
+    transition: all var(--transition);
+    padding: 0;
+    flex-shrink: 0;
+}
 
-    transform: translateX(26px);
+.as-theme-btn:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-strong);
+}
 
+.as-theme-btn svg {
+    width: 15px;
+    height: 15px;
+}
+
+/* Mobile Hamburger Toggle */
+.as-mobile-toggle {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--foreground);
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: all var(--transition);
+}
+
+.as-mobile-toggle:hover {
+    border-color: var(--border-strong);
+}
+
+.as-mobile-toggle svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* Responsive Navbar */
+@media (max-width: 1024px) {
+    .as-status-indicator span.as-status-text {
+        display: none;
+    }
+    .as-status-indicator {
+        padding: 0.35rem;
+    }
+    .as-nav-links {
+        gap: 1.15rem;
+    }
+}
+
+@media (max-width: 860px) {
+    .as-nav-links {
+        position: fixed;
+        top: 53px;
+        left: 0;
+        width: 100%;
+        background: var(--background);
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.25rem 1.75rem;
+        gap: 1rem;
+        box-shadow: var(--shadow-card);
+        display: none;
+    }
+
+    .as-nav-links.as-open {
+        display: flex;
+    }
+
+    .as-mobile-toggle {
+        display: flex;
+    }
+
+    .as-navbar-actions .as-status-indicator {
+        display: none;
+    }
 }

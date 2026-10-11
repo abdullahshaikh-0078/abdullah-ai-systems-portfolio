@@ -1,0 +1,212 @@
+/* ===== ARCHITECTURE DEEP DIVE MODAL (HIGH CONTRAST SYSTEM) ===== */
+
+.as-arch-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    opacity: 0;
+    transition: opacity var(--transition);
+    overscroll-behavior: contain;
+}
+
+.as-arch-modal-backdrop.open {
+    display: flex !important;
+    opacity: 1 !important;
+}
+
+.as-arch-modal-box {
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-lg);
+    max-width: 760px;
+    width: 100%;
+    max-height: 86vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-card-hover);
+    position: relative;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+.as-arch-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.as-arch-modal-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--foreground);
+    margin: 0 0 0.25rem 0;
+    letter-spacing: -0.02em;
+}
+
+.as-arch-modal-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--muted-foreground);
+    margin: 0;
+}
+
+.as-arch-modal-close {
+    background: var(--muted);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+    width: 30px;
+    height: 30px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.15rem;
+    cursor: pointer;
+    transition: all var(--transition);
+    flex-shrink: 0;
+}
+
+.as-arch-modal-close:hover {
+    background: var(--surface-hover);
+    border-color: var(--border-strong);
+}
+
+/* Modal Content & Typography */
+.as-arch-content {
+    color: var(--muted-foreground);
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+
+.as-arch-content h4 {
+    color: var(--foreground);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin: 1.5rem 0 0.6rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.as-arch-overview-text {
+    font-size: 0.9375rem;
+    color: var(--foreground);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+}
+
+/* High Contrast Code / Architecture ASCII Block */
+.as-arch-diagram-block {
+    background: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 1.15rem;
+    margin: 0.75rem 0 1.25rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    overflow-x: auto;
+    color: var(--foreground);
+    line-height: 1.5;
+}
+
+/* High Contrast Benchmark & Metrics Table */
+.as-arch-metrics-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0 1.25rem 0;
+    font-size: 0.8125rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+.as-arch-metrics-table th,
+.as-arch-metrics-table td {
+    padding: 0.6rem 0.85rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+}
+
+.as-arch-metrics-table th {
+    font-family: var(--font-mono);
+    color: var(--muted-foreground);
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--muted);
+    width: 40%;
+}
+
+.as-arch-metrics-table td {
+    color: var(--foreground);
+    background: var(--surface);
+}
+
+.as-arch-metrics-table td strong {
+    color: var(--foreground);
+    font-family: var(--font-mono);
+    font-weight: 700;
+}
+
+/* Highlights List */
+.as-arch-highlights-list {
+    padding-left: 1.25rem;
+    margin: 0.75rem 0 1.5rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.as-arch-highlights-list li {
+    color: var(--muted-foreground);
+}
+
+.as-arch-highlights-list strong {
+    color: var(--foreground);
+}
+
+/* Modal Actions Footer */
+.as-arch-actions-footer {
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+/* Interactive Stage Nodes & Inspector */
+.as-stage-node-btn {
+    transition: all 0.2s ease;
+}
+
+.as-stage-node-btn:hover {
+    border-color: var(--border-strong) !important;
+    background: var(--surface-hover) !important;
+    transform: translateY(-1px);
+}
+
+.as-stage-node-btn.active {
+    background: var(--pill-navy-bg) !important;
+    border-color: var(--secondary-accent) !important;
+    box-shadow: 0 0 12px -2px rgba(141, 168, 197, 0.25);
+}
